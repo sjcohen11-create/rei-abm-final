@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REI Co-op Field Intelligence — Spring 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #2D5016; --green-mid: #3d6b1f; --green-light: #c8d9b0;
+  --tan: #C4956A; --tan-light: #ddb898; --tan-pale: #f0dcc8;
+  --cream: #F5F0E8; --cream-dark: #ede5d5; --cream-mid: #e5dbc8;
+  --rust: #8B4513; --rust-light: #a85a2a;
+  --charcoal: #2C2416; --ink: #1a1208;
+  --gold: #c9952a; --gold-light: #f0c96e;
+  --blue: #1F6FEB; --blue-light: #EFF6FF;
+  --teal: #00A98F; --border: #E5E7EB;
+  --shadow: 0 12px 48px rgba(44,36,22,0.22);
+  --page-w: 900px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#6b5a42;font-family:'Crimson Text',serif;overflow-x:hidden;}
+
+/* Grain */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.5;}
+
+/* ══ CATALOGUE WRAPPER ══ */
+.catalog{display:flex;flex-direction:column;align-items:center;padding:40px 20px;gap:0;}
+
+/* ══ PAGE ══ */
+.cat-page{
+  width:100%;max-width:var(--page-w);
+  background:var(--cream);
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.cat-page + .cat-page{border-top:3px solid var(--tan);}
+
+/* Page texture lines */
+.cat-page::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(44,36,22,0.025) 27px,rgba(44,36,22,0.025) 28px);pointer-events:none;z-index:0;}
+.cat-page > *{position:relative;z-index:1;}
+
+/* Page number */
+.pg-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--tan);text-align:center;padding:10px 0 0;border-top:1px solid rgba(196,149,106,0.3);}
+
+/* ══ TYPOGRAPHY ══ */
+.eyebrow{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--rust);}
+.mag-title{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,88px);font-weight:900;line-height:0.92;letter-spacing:-0.03em;color:var(--ink);}
+.mag-title em{font-style:italic;color:var(--green);}
+.mag-deck{font-family:'DM Serif Display',serif;font-size:clamp(16px,2.5vw,22px);line-height:1.4;color:var(--charcoal);font-style:italic;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,40px);font-weight:700;line-height:1.1;color:var(--ink);}
+.section-title em{font-style:italic;color:var(--green);}
+.pull-quote{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);font-weight:700;font-style:italic;color:var(--green);line-height:1.3;border-left:4px solid var(--gold);padding-left:16px;}
+.body-text{font-family:'Crimson Text',serif;font-size:15px;line-height:1.8;color:var(--charcoal);}
+.caption{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;color:var(--tan);text-transform:uppercase;}
+.ornament{text-align:center;color:var(--tan);font-size:12px;letter-spacing:0.4em;margin:12px 0;opacity:0.7;}
+
+/* ══ COVER PAGE ══ */
+.cover-banner{background:var(--rust);padding:9px 48px;display:flex;align-items:center;justify-content:space-between;}
+.cover-banner-text{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--cream);opacity:0.9;}
+
+.cover-inner{display:grid;grid-template-columns:1fr 1fr;min-height:700px;height:700px;align-items:stretch;}
+.cover-left{background:var(--green);padding:48px 40px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+.cover-right{position:relative;overflow:hidden;min-height:700px;display:flex;flex-direction:column;}
+.cover-right img{width:100%;height:100%;object-fit:cover;filter:sepia(30%) contrast(1.1);}
+.cover-right-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(45,80,22,0.3),transparent 60%);z-index:1;}
+
+/* Decorative lines on cover left */
+.cover-left::before{content:'';position:absolute;top:0;right:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(196,149,106,0.5),transparent);}
+
+.cover-issue{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tan-light);margin-bottom:28px;}
+.cover-mag-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,60px);font-weight:900;line-height:0.95;letter-spacing:-0.02em;color:var(--cream);margin-bottom:16px;}
+.cover-mag-title em{font-style:italic;color:var(--tan);}
+.cover-sub{font-family:'DM Serif Display',serif;font-size:clamp(13px,1.8vw,17px);color:rgba(245,240,232,0.8);font-style:italic;line-height:1.5;margin-bottom:24px;}
+.cover-countdown-box{background:rgba(0,0,0,0.3);border:1px solid rgba(196,149,106,0.3);padding:14px 18px;margin-bottom:20px;}
+.cover-cd-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:var(--tan);line-height:1;}
+.cover-cd-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.7);}
+.cover-cd-sub{font-family:'Crimson Text',serif;font-size:13px;color:rgba(245,240,232,0.65);font-style:italic;margin-top:4px;}
+.cover-qr-row{display:flex;align-items:flex-end;justify-content:space-between;}
+.cover-qr-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tan-light);margin-bottom:6px;}
+.at-mark{display:flex;align-items:center;gap:6px;font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:var(--tan-light);}
+
+/* ══ POSTCARD PAGE ══ */
+.postcard-page{background:var(--cream-dark);}
+.postcard-inner{padding:40px 48px;}
+.postcard{background:#f9f5ee;border:1px solid var(--tan);box-shadow:4px 4px 0 rgba(139,69,19,0.2);position:relative;display:grid;grid-template-columns:1fr 1px 1fr;gap:0;min-height:340px;}
+.postcard::before{content:'POSTCARD';position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.3em;color:var(--tan);opacity:0.6;}
+.postcard-divider{background:var(--tan);opacity:0.3;margin:20px 0;}
+
+/* Left: letter */
+.postcard-letter{padding:32px 28px 24px;}
+.letter-salutation{font-family:'Crimson Text',serif;font-size:16px;color:var(--charcoal);margin-bottom:12px;font-style:italic;}
+.letter-body{font-family:'Crimson Text',serif;font-size:14px;color:var(--charcoal);line-height:1.8;margin-bottom:16px;}
+.letter-sign{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--charcoal);margin-bottom:6px;}
+.letter-contact{font-family:'DM Mono',monospace;font-size:10px;color:var(--rust);letter-spacing:0.06em;line-height:1.8;}
+
+/* Right: address + stamp */
+.postcard-right{padding:32px 28px 24px;display:flex;flex-direction:column;justify-content:space-between;}
+.stamp-area{display:flex;justify-content:flex-end;margin-bottom:20px;}
+.stamp{width:72px;height:88px;border:2px solid var(--charcoal);background:var(--cream-dark);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden;position:relative;}
+.stamp-perforation{position:absolute;inset:0;box-shadow:inset 0 0 0 3px rgba(44,36,22,0.15);pointer-events:none;}
+.stamp-img{width:100%;height:64px;object-fit:cover;filter:sepia(40%) contrast(1.1);}
+.stamp-val{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.1em;text-align:center;padding:2px;background:var(--cream-dark);width:100%;color:var(--charcoal);}
+.postmark{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;color:var(--rust);opacity:0.6;transform:rotate(-12deg);margin-top:-6px;text-align:right;}
+.address-lines{font-family:'Crimson Text',serif;font-size:14px;color:var(--charcoal);line-height:1.9;}
+.address-name{font-weight:600;}
+.postal-lines{display:flex;flex-direction:column;gap:6px;margin-top:16px;}
+.postal-line{height:1px;background:var(--tan);opacity:0.4;}
+
+/* ══ TOC ══ */
+.toc-section{padding:32px 48px;}
+.toc-row{display:flex;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid rgba(196,149,106,0.2);}
+.toc-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--rust);min-width:24px;}
+.toc-dots{flex:1;border-bottom:1px dotted var(--tan);margin:0 4px;opacity:0.5;}
+.toc-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);font-style:italic;}
+.toc-sub{font-family:'Crimson Text',serif;font-size:12px;color:var(--charcoal);margin-top:2px;}
+
+/* ══ SPREAD 2: EDITORIAL PRODUCT ══ */
+.editorial-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:600px;}
+.editorial-left{padding:48px 40px;background:var(--cream);display:flex;flex-direction:column;justify-content:space-between;}
+.editorial-right{background:var(--cream-dark);padding:32px;position:relative;overflow:hidden;}
+
+/* Product image cards - editorial rotated style */
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;}
+.product-card{background:white;box-shadow:3px 3px 0 rgba(139,69,19,0.15);overflow:hidden;position:relative;}
+.product-card:nth-child(1){transform:rotate(-1.5deg);z-index:3;}
+.product-card:nth-child(2){transform:rotate(1deg);z-index:2;margin-top:12px;}
+.product-card:nth-child(3){transform:rotate(0.8deg);z-index:2;margin-top:-8px;}
+.product-card:nth-child(4){transform:rotate(-1deg);z-index:1;margin-top:10px;}
+.product-card img{width:100%;height:130px;object-fit:cover;filter:sepia(15%) contrast(1.05);}
+.product-card-label{background:var(--rust);padding:5px 8px;}
+.product-card-name{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream);}
+.product-card-price{font-family:'Playfair Display',serif;font-size:11px;color:var(--tan-light);}
+.product-stamp{position:absolute;top:-6px;right:-6px;background:var(--gold);color:var(--ink);font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 8px;transform:rotate(8deg);font-weight:600;}
+
+/* Stat callouts */
+.stat-col{display:flex;flex-direction:column;gap:12px;}
+.stat-item{border-left:3px solid var(--rust);padding-left:14px;}
+.stat-big{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--green);line-height:1;}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--rust);margin-bottom:3px;}
+.stat-desc{font-family:'Crimson Text',serif;font-size:13px;color:var(--charcoal);line-height:1.5;}
+
+/* ══ SPREAD 3: OBSTACLE PHOTOS ══ */
+.obstacles-page{padding:48px;}
+.obstacles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px;}
+.obstacle-card{display:flex;flex-direction:column;gap:0;overflow:hidden;position:relative;}
+.obstacle-img-wrap{height:220px;overflow:hidden;position:relative;}
+.obstacle-img-wrap img{width:100%;height:100%;object-fit:cover;filter:sepia(20%) contrast(1.08) brightness(0.92);}
+.obstacle-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(44,36,22,0.7));}
+.obstacle-icon-badge{position:absolute;top:12px;left:12px;background:var(--rust);padding:6px 10px;font-size:18px;}
+.obstacle-content{background:var(--cream-dark);padding:16px;border:1px solid rgba(196,149,106,0.3);border-top:3px solid var(--rust);}
+.obstacle-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.obstacle-body{font-family:'Crimson Text',serif;font-size:13px;color:var(--charcoal);line-height:1.65;margin-bottom:8px;}
+.obstacle-cost{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.06em;color:var(--rust);text-transform:uppercase;padding-top:8px;border-top:1px solid rgba(196,149,106,0.3);}
+
+/* Checklist */
+.checklist-box{background:var(--green);padding:28px;margin-top:28px;}
+.checklist-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--cream);margin-bottom:14px;font-style:italic;}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.check-item{display:flex;align-items:flex-start;gap:8px;font-family:'Crimson Text',serif;font-size:13px;color:rgba(245,240,232,0.88);line-height:1.5;}
+.check-box{width:14px;height:14px;border:1.5px solid rgba(196,149,106,0.6);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--tan);}
+
+/* ══ SPREAD 4: GEAR PRODUCTS ══ */
+.gear-page{padding:32px 48px;}
+.gear-intro-row{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;margin-bottom:24px;}
+.gear-cards-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.gear-card-v2{background:var(--cream-dark);border:1.5px solid var(--tan);position:relative;overflow:hidden;}
+.gear-card-v2::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rust),var(--gold));}
+.gear-img-area{height:100px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--green);position:relative;}
+.gear-svg-wrap{padding:16px;display:flex;align-items:center;justify-content:center;}
+.gear-body{padding:12px 14px 12px;}
+.gear-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.gear-category{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--rust);margin-bottom:10px;}
+.gear-desc{font-family:'Crimson Text',serif;font-size:14px;color:var(--ink);line-height:1.65;margin-bottom:10px;}
+.gear-spec{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.04em;color:var(--rust);line-height:1.7;padding-top:8px;border-top:1px solid rgba(196,149,106,0.3);}
+.gear-combo-box{background:var(--charcoal);padding:22px 24px;margin-top:24px;position:relative;}
+.gear-combo-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--tan));}
+
+/* ══ SPREAD 5: OS PREVIEW ══ */
+.os-preview-page{padding:48px;}
+.os-preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
+.os-preview-left{}
+.os-preview-right{display:flex;flex-direction:column;align-items:center;gap:16px;}
+
+/* Airtable interface preview */
+.at-preview{background:white;border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1);}
+.at-preview-header{background:#F8F9FC;border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:8px;}
+.at-preview-title{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;color:#0F172A;}
+.at-preview-tabs{display:flex;border-bottom:1px solid var(--border);background:white;padding:0 14px;}
+.at-prev-tab{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:#6B7280;padding:8px 12px;cursor:pointer;border-bottom:2px solid transparent;border:none;background:none;transition:all 0.2s ease;margin-bottom:-1px;white-space:nowrap;}
+.at-prev-tab:hover{color:#0F172A;}
+.at-prev-tab.active{color:var(--blue);border-bottom:2px solid var(--blue);font-weight:600;}
+.at-prev-body{padding:12px;min-height:160px;}
+.at-prev-content{display:none;}
+.at-prev-content.active{display:block;}
+
+/* Grid rows */
+.prev-row{display:flex;gap:8px;margin-bottom:6px;align-items:center;}
+.prev-cell{font-family:'DM Mono',monospace;font-size:9px;color:#374151;padding:3px 6px;background:#F8F9FC;border-radius:3px;white-space:nowrap;}
+.prev-cell.hdr{background:#E5E7EB;color:#6B7280;font-weight:600;}
+.prev-cell.flex1{flex:1;}
+.prev-tag{border-radius:100px;padding:2px 7px;font-family:'DM Mono',monospace;font-size:9px;font-weight:600;white-space:nowrap;}
+.tag-g{background:#D1FAE5;color:#065F46;}
+.tag-y{background:#FEF3C7;color:#92400E;}
+.tag-r{background:#FEE2E2;color:#991B1B;}
+.agent-note{background:#FEF3C7;border-left:2px solid #F59E0B;padding:6px 8px;font-family:'DM Mono',monospace;font-size:8px;color:#92400E;margin-top:6px;line-height:1.5;}
+
+/* Kanban mini */
+.prev-kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.prev-kcol-hdr{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.06em;text-transform:uppercase;color:#6B7280;margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--border);}
+.prev-kcard{background:white;border:1px solid var(--border);border-radius:4px;padding:6px 7px;margin-bottom:5px;}
+.prev-kcard-name{font-family:'DM Sans',sans-serif;font-size:9px;font-weight:600;color:#0F172A;margin-bottom:2px;}
+.prev-kcard-agent{font-family:'DM Mono',monospace;font-size:8px;color:var(--teal);}
+
+/* Timeline mini */
+.prev-timeline{display:flex;flex-direction:column;gap:8px;}
+.prev-tl-item{display:flex;gap:10px;align-items:flex-start;}
+.prev-tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.prev-tl-content{}
+.prev-tl-date{font-family:'DM Mono',monospace;font-size:8px;color:#9CA3AF;}
+.prev-tl-title{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#0F172A;}
+
+/* Log mini */
+.prev-log{display:flex;flex-direction:column;gap:6px;}
+.prev-log-row{display:flex;gap:8px;padding:6px 8px;background:#F8F9FC;border-radius:4px;border-left:2px solid var(--blue);}
+.prev-log-row.warn{border-left-color:#F59E0B;}
+.prev-log-row.ok{border-left-color:var(--teal);}
+.prev-log-agent{font-family:'DM Mono',monospace;font-size:8px;color:var(--blue);min-width:120px;flex-shrink:0;}
+.prev-log-row.warn .prev-log-agent{color:#F59E0B;}
+.prev-log-row.ok .prev-log-agent{color:var(--teal);}
+.prev-log-text{font-family:'DM Sans',sans-serif;font-size:9px;color:#374151;flex:1;line-height:1.4;}
+.prev-log-time{font-family:'DM Mono',monospace;font-size:8px;color:#9CA3AF;white-space:nowrap;}
+
+/* Expedition QR badge */
+.expedition-badge{text-align:center;}
+.qr-cta-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:8px;}
+.qr-cta-sub{font-family:'Crimson Text',serif;font-size:14px;color:var(--charcoal);margin-bottom:16px;font-style:italic;}
+.qr-scan-btn{background:var(--rust);color:var(--cream);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:12px 24px;border:none;cursor:pointer;box-shadow:3px 3px 0 rgba(0,0,0,0.2);transition:all 0.2s ease;width:100%;margin-top:8px;}
+.qr-scan-btn:hover{background:var(--rust-light);transform:translate(-1px,-1px);box-shadow:4px 4px 0 rgba(0,0,0,0.2);}
+
+/* ══ TRANSITION SECTION ══ */
+.transition-section{
+  width:100%;max-width:var(--page-w);
+  background:var(--green);
+  padding:48px;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+  box-shadow:var(--shadow);
+  position:relative;overflow:hidden;
+}
+.transition-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(196,149,106,0.04) 30px,rgba(196,149,106,0.04) 31px);}
+.transition-arrow{font-size:48px;color:var(--tan);margin:12px 0;animation:bounce-down 1.5s ease infinite;}
+@keyframes bounce-down{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+.transition-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tan-light);margin-bottom:10px;position:relative;z-index:1;}
+.transition-title{font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,36px);font-weight:900;color:var(--cream);line-height:1.1;margin-bottom:10px;position:relative;z-index:1;}
+.transition-title em{font-style:italic;color:var(--tan);}
+.transition-sub{font-family:'Crimson Text',serif;font-size:16px;color:rgba(245,240,232,0.75);font-style:italic;max-width:500px;position:relative;z-index:1;}
+
+/* ══ LAUNCH OS SECTION ══ */
+#launch-os{background:#F8F9FC;}
+
+.sticky-bar{position:sticky;top:0;z-index:100;background:var(--green);padding:10px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--tan);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+.sticky-clock{font-family:'DM Mono',monospace;font-size:14px;color:var(--cream);letter-spacing:0.04em;}
+.sticky-label{font-family:'Crimson Text',serif;font-size:15px;font-style:italic;color:var(--tan-light);}
+.sticky-cta{background:var(--rust);color:var(--cream);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:8px 18px;border:none;cursor:pointer;transition:all 0.2s;}
+.sticky-cta:hover{background:var(--rust-light);}
+
+/* Countdown */
+.cd-section{background:var(--green);padding:64px 48px;text-align:center;position:relative;overflow:hidden;}
+.cd-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(196,149,106,0.04) 40px,rgba(196,149,106,0.04) 41px);}
+.cd-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tan-light);margin-bottom:14px;position:relative;z-index:1;}
+.cd-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,52px);font-weight:900;color:var(--cream);line-height:1.1;margin-bottom:24px;position:relative;z-index:1;}
+.cd-title em{font-style:italic;color:var(--tan);}
+.cd-clock{display:inline-flex;background:rgba(0,0,0,0.25);border:1px solid rgba(196,149,106,0.3);margin-bottom:24px;position:relative;z-index:1;}
+.cd-unit{padding:20px 28px;border-right:1px solid rgba(196,149,106,0.2);min-width:90px;}
+.cd-unit:last-child{border-right:none;}
+.cd-num{font-family:'DM Mono',monospace;font-size:38px;font-weight:500;color:var(--cream);line-height:1;display:block;margin-bottom:6px;}
+.cd-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tan-light);}
+.cd-sub{font-family:'Crimson Text',serif;font-size:18px;color:rgba(245,240,232,0.75);font-style:italic;max-width:520px;margin:0 auto;position:relative;z-index:1;}
+
+/* Omni/Field Agent explainer */
+.product-explainer{max-width:900px;margin:0 auto;padding:56px 48px;}
+.explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:24px;}
+.explainer-card{background:white;border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;overflow:hidden;}
+.explainer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.explainer-card.omni::before{background:linear-gradient(90deg,#7B61FF,#1F6FEB);}
+.explainer-card.agents::before{background:linear-gradient(90deg,#00A98F,#1F6FEB);}
+.explainer-badge{display:inline-flex;align-items:center;gap:6px;background:#F8F9FC;border:1px solid var(--border);border-radius:100px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;color:#374151;margin-bottom:14px;}
+.explainer-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#0F172A;margin-bottom:8px;}
+.explainer-body{font-family:'DM Sans',sans-serif;font-size:13px;color:#6B7280;line-height:1.7;margin-bottom:14px;}
+.explainer-example{background:#F8F9FC;border-radius:8px;padding:12px 14px;font-family:'DM Mono',monospace;font-size:11px;color:#374151;line-height:1.6;}
+.explainer-example strong{color:var(--blue);}
+.try-it-link{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-top:12px;text-decoration:none;cursor:pointer;}
+.try-it-link:hover{opacity:0.8;}
+
+/* Split screen */
+.split-section{max-width:900px;margin:0 auto;padding:0 48px 56px;}
+.split-heading{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,34px);font-weight:700;color:#0F172A;line-height:1.15;margin-bottom:6px;}
+.split-sub{font-family:'Crimson Text',serif;font-size:17px;color:#6B7280;font-style:italic;margin-bottom:28px;}
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.split-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;padding:7px 12px;}
+.split-lbl.chaos{background:#FEF2F2;color:#991B1B;border:1px solid #FCA5A5;}
+.split-lbl.clarity{background:var(--blue-light);color:var(--blue);border:1px solid rgba(31,111,235,0.2);}
+.chaos-panel{background:#1E1E1E;padding:16px;min-height:260px;border-radius:0 0 8px 8px;}
+.clarity-panel{background:white;padding:16px;min-height:260px;border-radius:0 0 8px 8px;}
+
+.slack-msg{display:flex;gap:10px;margin-bottom:10px;animation:slack-in 0.4s ease both;}
+.slack-msg:nth-child(1){animation-delay:0.2s;}
+.slack-msg:nth-child(2){animation-delay:1.4s;}
+.slack-msg:nth-child(3){animation-delay:2.6s;}
+.slack-msg:nth-child(4){animation-delay:3.8s;}
+@keyframes slack-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.slack-av{width:26px;height:26px;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.slack-name{font-family:'DM Mono',monospace;font-size:9px;color:#e2e8f0;margin-bottom:2px;}
+.slack-text{font-family:'DM Sans',sans-serif;font-size:11px;color:#94a3b8;line-height:1.4;}
+.slack-urgent{color:#F87171 !important;font-weight:600;}
+.sheets-bar{background:#0F4C3A;padding:5px 8px;display:flex;gap:2px;overflow:hidden;margin-top:8px;}
+.sheets-tab{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;color:#86efac;background:rgba(0,0,0,0.3);white-space:nowrap;}
+.sheets-tab.bad{color:#FCA5A5;background:rgba(239,68,68,0.15);}
+
+.at-hdr{background:#F8F9FC;border-bottom:1px solid var(--border);padding:8px 12px;display:flex;align-items:center;gap:8px;margin:-16px -16px 12px;}
+.at-base-name{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;color:#0F172A;}
+.agent-badge{margin-left:auto;display:flex;align-items:center;gap:4px;background:#D1FAE5;border:1px solid #6EE7B7;border-radius:100px;padding:3px 9px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:#065F46;}
+.agent-dot-live{width:5px;height:5px;border-radius:50%;background:#10B981;animation:ap 1.5s ease infinite;}
+@keyframes ap{0%,100%{opacity:1}50%{opacity:0.4}}
+.at-record{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #F1F3F8;font-family:'DM Sans',sans-serif;font-size:11px;color:#374151;}
+.at-stag{border-radius:100px;padding:1px 7px;font-size:10px;font-weight:600;white-space:nowrap;}
+.stag-g{background:#D1FAE5;color:#065F46;}
+.stag-y{background:#FEF3C7;color:#92400E;}
+.stag-r{background:#FEE2E2;color:#991B1B;}
+.at-flag{background:#FEF3C7;border:1px solid #FDE68A;border-left:3px solid #F59E0B;padding:7px 9px;border-radius:4px;font-family:'DM Mono',monospace;font-size:9px;color:#92400E;margin-top:8px;line-height:1.5;}
+.meter-wrap{margin-top:10px;}
+.meter-lbl{font-family:'DM Mono',monospace;font-size:9px;color:#6B7280;letter-spacing:0.06em;margin-bottom:4px;}
+.meter-track{height:7px;background:#F1F3F8;border-radius:3px;overflow:hidden;}
+.meter-fill{height:100%;background:linear-gradient(90deg,#1F6FEB,#00A98F);border-radius:3px;width:0;transition:width 1.5s ease 0.5s;}
+
+/* OS interface */
+.os-wrap{max-width:900px;margin:0 auto;padding:0 48px 56px;}
+.os-interface{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);}
+.os-int-header{background:#F8F9FC;border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:12px;}
+.os-int-title{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;color:#0F172A;}
+.os-int-badge{margin-left:auto;font-family:'DM Mono',monospace;font-size:10px;color:#6B7280;}
+.os-tabs{display:flex;border-bottom:1px solid var(--border);background:white;padding:0 20px;}
+.os-tab{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:#6B7280;padding:12px 16px;cursor:pointer;border-bottom:2px solid transparent;border:none;background:none;transition:all 0.2s;margin-bottom:-1px;}
+.os-tab:hover{color:#0F172A;}
+.os-tab.active{color:var(--blue);border-bottom:2px solid var(--blue);font-weight:600;}
+.os-content{padding:20px;display:none;}
+.os-content.active{display:block;}
+
+/* Grid view */
+.grid-tbl{width:100%;border-collapse:collapse;}
+.grid-tbl th{background:#F8F9FC;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;}
+.grid-tbl td{padding:9px 12px;border-bottom:1px solid #F8F9FC;font-family:'DM Sans',sans-serif;font-size:12px;color:#374151;vertical-align:middle;}
+.grid-tbl tr:hover td{background:#F8F9FC;}
+.agent-flag-row{background:#FEF3C7;border:1px solid #FDE68A;border-left:3px solid #F59E0B;padding:7px 10px;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;color:#92400E;margin-top:6px;line-height:1.5;}
+
+/* Kanban */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.k-col-hdr{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px;display:flex;justify-content:space-between;}
+.k-count{background:#F1F3F8;border-radius:100px;padding:1px 6px;font-size:9px;}
+.k-card{background:white;border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.k-name{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#0F172A;margin-bottom:3px;}
+.k-detail{font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;margin-bottom:5px;}
+.k-agent{font-family:'DM Mono',monospace;font-size:9px;color:var(--teal);background:#F0FDF9;border-radius:100px;padding:2px 7px;display:inline-block;}
+
+/* Timeline */
+.timeline{position:relative;padding-left:22px;}
+.timeline::before{content:'';position:absolute;left:5px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--blue),var(--teal));border-radius:2px;}
+.tl-item{position:relative;margin-bottom:18px;}
+.tl-dot{position:absolute;left:-22px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--blue);border:2.5px solid white;box-shadow:0 0 0 2px var(--blue);}
+.tl-dot.done{background:var(--teal);box-shadow:0 0 0 2px var(--teal);}
+.tl-dot.warn{background:#F59E0B;box-shadow:0 0 0 2px #F59E0B;}
+.tl-date{font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;margin-bottom:2px;}
+.tl-title{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#0F172A;margin-bottom:2px;}
+.tl-agent{font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);}
+
+/* Agent log */
+.log-list{display:flex;flex-direction:column;gap:10px;}
+.log-entry{display:flex;gap:12px;padding:12px 14px;background:#F8F9FC;border-radius:8px;border-left:3px solid var(--blue);}
+.log-entry.ok{border-left-color:var(--teal);}
+.log-entry.warn{border-left-color:#F59E0B;}
+.log-entry.info{border-left-color:#6B7280;}
+.log-agent{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--blue);white-space:nowrap;flex-shrink:0;min-width:170px;}
+.log-entry.ok .log-agent{color:var(--teal);}
+.log-entry.warn .log-agent{color:#F59E0B;}
+.log-entry.info .log-agent{color:#6B7280;}
+.log-action{font-family:'DM Sans',sans-serif;font-size:12px;color:#374151;line-height:1.5;flex:1;}
+.log-time{font-family:'DM Mono',monospace;font-size:10px;color:#9CA3AF;white-space:nowrap;flex-shrink:0;}
+
+/* CTA */
+.cta-wrap{max-width:900px;margin:0 auto;padding:0 48px 80px;}
+.cta-box{background:var(--green);padding:64px 56px;text-align:center;position:relative;overflow:hidden;}
+.cta-box::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 30px,rgba(196,149,106,0.04) 30px,rgba(196,149,106,0.04) 31px);}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,44px);font-weight:900;color:var(--cream);line-height:1.1;margin-bottom:14px;position:relative;z-index:1;}
+.cta-title em{font-style:italic;color:var(--tan);}
+.cta-sub{font-family:'Crimson Text',serif;font-size:17px;color:rgba(245,240,232,0.75);font-style:italic;max-width:480px;margin:0 auto 32px;position:relative;z-index:1;}
+.cta-btn{background:var(--rust);color:var(--cream);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:18px 44px;border:none;cursor:pointer;box-shadow:4px 4px 0 rgba(0,0,0,0.2);transition:all 0.2s;display:inline-block;position:relative;z-index:1;}
+.cta-btn:hover{background:var(--rust-light);transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(0,0,0,0.2);}
+.cta-sig{font-family:'Crimson Text',serif;font-size:16px;font-style:italic;color:rgba(245,240,232,0.7);margin-top:24px;position:relative;z-index:1;}
+.cta-contact{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;color:rgba(196,149,106,0.7);margin-top:6px;position:relative;z-index:1;line-height:1.8;}
+.cta-airtable{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--tan-light);position:relative;z-index:1;}
+
+/* DM Sans for OS */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+
+@media(max-width:768px){
+  .cover-inner,.editorial-grid,.obstacles-grid,.gear-cards-row,.explainer-grid,.split-grid,.os-preview-grid{grid-template-columns:1fr;}
+  .cat-page,.transition-section,.sticky-bar,.cd-section,.product-explainer,.split-section,.os-wrap,.cta-wrap{padding-left:20px;padding-right:20px;}
+  .kanban{grid-template-columns:1fr 1fr;}
+  .prev-kanban{grid-template-columns:1fr 1fr;}
+  .check-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="catalog">
+
+<!-- ══════════════════════════════════════
+     PAGE 1: COVER
+══════════════════════════════════════ -->
+<div class="cat-page">
+  <div class="cover-banner">
+    <span class="cover-banner-text">REI Co-op × Airtable Field Intelligence</span>
+    <span class="cover-banner-text">Spring 2026 — Pre-Launch Edition</span>
+  </div>
+
+  <div class="cover-inner">
+    <!-- LEFT: Text + Countdown -->
+    <div class="cover-left">
+      <div>
+        <div class="cover-issue">Vol. 88 · Spring 2026 · Account-Specific</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--tan-light);margin-bottom:14px;opacity:0.6;">Field Intelligence Report</div>
+
+        <div class="cover-mag-title">Launch<br><em>Intel</em></div>
+        <div style="height:1px;background:rgba(196,149,106,0.3);margin:16px 0;"></div>
+        <div class="cover-sub">The operational briefing every REI product leader needs before the co-op's biggest week of the year.</div>
+      </div>
+
+      <div>
+        <div class="cover-countdown-box">
+          <div class="cover-cd-num" id="cover-cd-days">54</div>
+          <div class="cover-cd-label">Days until your Anniversary Sale</div>
+          <div class="cover-cd-sub">May 16, 2026 — the co-op's biggest commercial moment</div>
+        </div>
+
+        <div class="cover-qr-row">
+          <div>
+            <div class="cover-qr-label">Scan to open your custom Launch OS →</div>
+            <svg style="width:70px;height:70px;cursor:pointer;margin-top:5px;" viewBox="0 0 100 100" onclick="openOS()">
+              <rect width="100" height="100" fill="var(--cream-dark)" rx="1"/>
+              <rect x="5" y="5" width="28" height="28" fill="none" stroke="var(--rust)" stroke-width="2.5"/>
+              <rect x="9" y="9" width="20" height="20" fill="none" stroke="var(--rust)" stroke-width="1.5"/>
+              <rect x="13" y="13" width="12" height="12" fill="var(--rust)"/>
+              <rect x="67" y="5" width="28" height="28" fill="none" stroke="var(--rust)" stroke-width="2.5"/>
+              <rect x="71" y="9" width="20" height="20" fill="none" stroke="var(--rust)" stroke-width="1.5"/>
+              <rect x="75" y="13" width="12" height="12" fill="var(--rust)"/>
+              <rect x="5" y="67" width="28" height="28" fill="none" stroke="var(--rust)" stroke-width="2.5"/>
+              <rect x="9" y="71" width="20" height="20" fill="none" stroke="var(--rust)" stroke-width="1.5"/>
+              <rect x="13" y="75" width="12" height="12" fill="var(--rust)"/>
+              <rect x="38" y="5" width="5" height="5" fill="var(--rust)"/><rect x="48" y="5" width="5" height="5" fill="var(--rust)"/>
+              <rect x="58" y="5" width="5" height="5" fill="var(--rust)"/><rect x="43" y="12" width="5" height="5" fill="var(--rust)"/>
+              <rect x="38" y="38" width="5" height="5" fill="var(--rust)"/><rect x="53" y="43" width="5" height="5" fill="var(--rust)"/>
+              <rect x="38" y="48" width="5" height="5" fill="var(--rust)"/><rect x="63" y="48" width="5" height="5" fill="var(--rust)"/>
+              <rect x="48" y="58" width="5" height="5" fill="var(--rust)"/><rect x="67" y="38" width="5" height="5" fill="var(--rust)"/>
+              <rect x="82" y="43" width="5" height="5" fill="var(--rust)"/><rect x="67" y="58" width="5" height="5" fill="var(--rust)"/>
+              <rect x="38" y="67" width="5" height="5" fill="var(--rust)"/><rect x="53" y="72" width="5" height="5" fill="var(--rust)"/>
+              <rect x="38" y="77" width="5" height="5" fill="var(--rust)"/><rect x="63" y="82" width="5" height="5" fill="var(--rust)"/>
+              <rect x="72" y="72" width="5" height="5" fill="var(--rust)"/><rect x="87" y="77" width="5" height="5" fill="var(--rust)"/>
+              <rect x="67" y="82" width="5" height="5" fill="var(--rust)"/>
+            </svg>
+          </div>
+          <div class="at-mark">
+            <svg width="18" height="18" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="rgba(196,149,106,0.2)"/><text x="5" y="22" font-size="16" fill="#C4956A">⬡</text></svg>
+            Airtable
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Mountain photo -->
+    <div class="cover-right" style="background:#0d1a06;position:relative;display:flex;flex-direction:column;">
+      <svg viewBox="0 0 480 700" preserveAspectRatio="xMidYMid slice" style="display:block;width:100%;height:100%;flex:1;min-height:0;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0a1204"/>
+            <stop offset="50%" stop-color="#1a2e0c"/>
+            <stop offset="100%" stop-color="#2D5016"/>
+          </linearGradient>
+          <linearGradient id="snow2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f5f0e8"/>
+            <stop offset="100%" stop-color="#ddb898"/>
+          </linearGradient>
+          <radialGradient id="moonglow" cx="78%" cy="14%" r="28%">
+            <stop offset="0%" stop-color="#C4956A" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+        </defs>
+        <!-- Sky -->
+        <rect width="480" height="680" fill="url(#sky2)"/>
+        <rect width="480" height="680" fill="url(#moonglow)"/>
+        <!-- Stars -->
+        <circle cx="32" cy="28" r="1.3" fill="#F5F0E8" opacity="0.9"/>
+        <circle cx="78" cy="48" r="0.8" fill="#F5F0E8" opacity="0.7"/>
+        <circle cx="140" cy="20" r="1.2" fill="#F5F0E8" opacity="0.85"/>
+        <circle cx="195" cy="38" r="0.9" fill="#F5F0E8" opacity="0.75"/>
+        <circle cx="258" cy="16" r="1.1" fill="#F5F0E8" opacity="0.8"/>
+        <circle cx="320" cy="42" r="1.3" fill="#F5F0E8" opacity="0.9"/>
+        <circle cx="385" cy="28" r="0.8" fill="#F5F0E8" opacity="0.65"/>
+        <circle cx="440" cy="52" r="1.0" fill="#F5F0E8" opacity="0.7"/>
+        <circle cx="62" cy="78" r="0.7" fill="#F5F0E8" opacity="0.6"/>
+        <circle cx="168" cy="65" r="1.0" fill="#F5F0E8" opacity="0.7"/>
+        <circle cx="296" cy="72" r="0.9" fill="#F5F0E8" opacity="0.75"/>
+        <circle cx="452" cy="80" r="0.7" fill="#F5F0E8" opacity="0.6"/>
+        <circle cx="110" cy="95" r="1.1" fill="#F5F0E8" opacity="0.65"/>
+        <circle cx="370" cy="88" r="0.8" fill="#F5F0E8" opacity="0.7"/>
+        <!-- Moon -->
+        <circle cx="400" cy="65" r="28" fill="#C4956A" opacity="0.15"/>
+        <circle cx="400" cy="65" r="22" fill="#d4a870" opacity="0.2"/>
+        <circle cx="400" cy="65" r="17" fill="#e8c070" opacity="0.28"/>
+        <!-- Rainier main peak -->
+        <polygon points="100,680 240,88 380,680" fill="#1e2e12"/>
+        <!-- Snow cap -->
+        <path d="M207,135 L240,88 L273,135 L260,144 L250,126 L240,134 L230,126 L220,144Z" fill="url(#snow2)" opacity="0.95"/>
+        <path d="M213,162 L240,134 L267,162 L257,170 L240,155 L223,170Z" fill="url(#snow2)" opacity="0.6"/>
+        <!-- Left ridge -->
+        <polygon points="0,680 70,295 185,680" fill="#161f0e" opacity="0.95"/>
+        <path d="M56,316 L70,295 L84,316 L77,323 L70,310 L63,323Z" fill="url(#snow2)" opacity="0.65"/>
+        <!-- Right ridge -->
+        <polygon points="295,680 395,265 480,680" fill="#161f0e" opacity="0.95"/>
+        <path d="M381,287 L395,265 L409,287 L401,294 L395,280 L389,294Z" fill="url(#snow2)" opacity="0.65"/>
+        <!-- Far right hill -->
+        <polygon points="390,680 460,340 480,400 480,680" fill="#111808" opacity="0.9"/>
+        <!-- Pine trees left -->
+        <g fill="#0a1006" opacity="0.98">
+          <polygon points="0,680 12,648 24,680"/>
+          <polygon points="26,680 40,636 54,680"/>
+          <polygon points="57,680 73,628 89,680"/>
+          <polygon points="92,680 110,620 128,680"/>
+          <polygon points="12,680 19,660 26,680"/>
+          <polygon points="130,680 146,632 162,680"/>
+        </g>
+        <!-- Pine trees right -->
+        <g fill="#0a1006" opacity="0.98">
+          <polygon points="318,680 332,644 346,680"/>
+          <polygon points="348,680 364,636 380,680"/>
+          <polygon points="382,680 400,624 418,680"/>
+          <polygon points="420,680 438,630 456,680"/>
+          <polygon points="458,680 468,650 478,680"/>
+        </g>
+        <!-- Mid ground -->
+        <path d="M0,652 Q60,640 120,650 Q180,660 240,646 Q300,632 360,648 Q420,664 480,650 L480,680 L0,680Z" fill="#0d1508"/>
+        <!-- Snow field at base of Rainier -->
+        <ellipse cx="240" cy="648" rx="80" ry="9" fill="#1a2810" opacity="0.6"/>
+        <!-- TENT - prominent center -->
+        <g transform="translate(188,575)">
+          <!-- Ground shadow -->
+          <ellipse cx="52" cy="82" rx="58" ry="9" fill="#040a02" opacity="0.65"/>
+          <!-- Tent body left face -->
+          <path d="M4,80 L52,-12 L52,80Z" fill="#7a3b0f" opacity="0.95"/>
+          <!-- Tent body right face -->
+          <path d="M100,80 L52,-12 L52,80Z" fill="#8B4513" opacity="0.95"/>
+          <!-- Tent ridge line -->
+          <line x1="52" y1="-12" x2="52" y2="80" stroke="rgba(196,149,106,0.5)" stroke-width="1.2"/>
+          <!-- Door opening -->
+          <path d="M34,80 Q52,50 70,80" fill="#3d1a06" opacity="0.9"/>
+          <!-- Warm glow layers -->
+          <ellipse cx="52" cy="78" rx="32" ry="8" fill="#F5A623" opacity="0.4"/>
+          <ellipse cx="52" cy="74" rx="22" ry="6" fill="#F5A623" opacity="0.3"/>
+          <ellipse cx="52" cy="68" rx="14" ry="4" fill="#FFD166" opacity="0.2"/>
+          <!-- Guy lines -->
+          <line x1="52" y1="-12" x2="-14" y2="80" stroke="#C4956A" stroke-width="0.9" opacity="0.55"/>
+          <line x1="52" y1="-12" x2="118" y2="80" stroke="#C4956A" stroke-width="0.9" opacity="0.55"/>
+          <!-- Stakes -->
+          <line x1="-14" y1="80" x2="-18" y2="88" stroke="#C4956A" stroke-width="1.2" opacity="0.5"/>
+          <line x1="118" y1="80" x2="122" y2="88" stroke="#C4956A" stroke-width="1.2" opacity="0.5"/>
+        </g>
+        <!-- Foreground ground stroke -->
+        <path d="M0,670 Q120,660 240,668 Q360,676 480,664" stroke="#080f05" stroke-width="2" fill="none"/>
+        <!-- Text overlay inside SVG -->
+        <foreignObject x="0" y="580" width="480" height="120">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="padding:24px 22px;background:linear-gradient(0deg,rgba(4,10,2,0.92) 40%,transparent);">
+            <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:#ddb898;margin-bottom:7px;opacity:0.75;">Mount Rainier, Washington State</div>
+            <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#F5F0E8;line-height:1.45;font-style:italic;">"The right gear makes the difference between a good trip and a great one."</div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;color:rgba(196,149,106,0.55);margin-top:7px;letter-spacing:0.08em;">— REI Co-op, est. 1938</div>
+          </div>
+        </foreignObject>
+      </svg>
+    </div>
+  </div>
+
+  <div class="pg-num">01 — Cover</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 2: POSTCARD + TOC
+══════════════════════════════════════ -->
+<div class="cat-page postcard-page">
+  <div class="postcard-inner">
+    <div class="eyebrow" style="margin-bottom:16px;">A note from the field</div>
+
+    <div class="postcard">
+      <!-- Letter side -->
+      <div class="postcard-letter">
+        <div class="letter-salutation">Dear Alex,</div>
+        <div class="letter-body">
+          I've been following REI's trajectory closely — 87 years of co-op history, 25 million members, and now your most ambitious spring in memory: 180+ stores, international expansion, and an Anniversary Sale that the whole organization rallies around.<br><br>
+          I put this briefing together because I think there's a version of May 16 where your team isn't chasing status updates, your vendors aren't waiting on follow-ups, and every agent working on your launch has a single source of truth to operate from.<br><br>
+          That's what Airtable is built for. Not to replace the judgment of the people who know the work best — but to give them the infrastructure to trust that the work is happening.<br><br>
+          I'd love 20 minutes to show you what that looks like built for your launch. Scan the QR on the back page, or just text me.
+        </div>
+        <div class="letter-sign">— Jamie Torres</div>
+        <div class="letter-contact">
+          Account Executive, Airtable<br>
+          📞 (206) 555-0142<br>
+          💬 Text me anytime
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="postcard-divider"></div>
+
+      <!-- Address + stamp side -->
+      <div class="postcard-right">
+        <div class="stamp-area">
+          <div>
+            <div class="stamp">
+              <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=100&q=70" alt="Mount Rainier" onerror="this.style.background='var(--green)'"/>
+              <div class="stamp-perforation"></div>
+              <div class="stamp-val">USA · FOREVER</div>
+            </div>
+            <div class="postmark">SEATTLE WA<br>MAR 23 2026</div>
+          </div>
+        </div>
+
+        <div class="address-lines">
+          <div class="address-name">Alex Chen</div>
+          <div>VP of Product</div>
+          <div>REI Co-op</div>
+          <div>6750 S 228th St</div>
+          <div>Kent, WA 98032</div>
+        </div>
+
+        <div class="postal-lines">
+          <div class="postal-line"></div>
+          <div class="postal-line"></div>
+          <div class="postal-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc-section" style="padding:28px 0 0;">
+      <div class="eyebrow" style="margin-bottom:14px;">What's inside</div>
+      <div class="toc-row">
+        <span class="toc-num">01</span>
+        <div style="flex:1;">
+          <div class="toc-title">Making May 16 your cleanest launch yet</div>
+          <div class="toc-sub">The state of REI's biggest commercial moment — and where the opportunity lives</div>
+        </div>
+        <div class="toc-dots"></div>
+        <span class="eyebrow">p.03</span>
+      </div>
+      <div class="toc-row">
+        <span class="toc-num">02</span>
+        <div style="flex:1;">
+          <div class="toc-title">The three coordination gaps slowing your launch down</div>
+          <div class="toc-sub">Where time gets lost between your team, your vendors, and your data</div>
+        </div>
+        <div class="toc-dots"></div>
+        <span class="eyebrow">p.05</span>
+      </div>
+      <div class="toc-row">
+        <span class="toc-num">03</span>
+        <div style="flex:1;">
+          <div class="toc-title">Custom agents that close the gap — without needing oversight</div>
+          <div class="toc-sub">Built by the people who know the launch, not by engineering</div>
+        </div>
+        <div class="toc-dots"></div>
+        <span class="eyebrow">p.07</span>
+      </div>
+      <div class="toc-row">
+        <span class="toc-num">04</span>
+        <div style="flex:1;">
+          <div class="toc-title">Your custom Launch OS — built for the team closest to the work</div>
+          <div class="toc-sub">A live simulation of your Anniversary Sale running on Airtable, ready to explore</div>
+        </div>
+        <div class="toc-dots"></div>
+        <span class="eyebrow">p.09</span>
+      </div>
+    </div>
+  </div>
+  <div class="pg-num">02 — A Note From the Field</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 3: THE STATE OF REI (Editorial)
+══════════════════════════════════════ -->
+<div class="cat-page">
+  <div class="editorial-grid">
+    <!-- LEFT: Stats + Text -->
+    <div class="editorial-left">
+      <div>
+        <div class="eyebrow" style="margin-bottom:12px;">Field Assessment — Spring 2026</div>
+        <div class="section-title">The co-op is at its<br>most <em>ambitious</em><br>moment yet.</div>
+        <div class="ornament">── ✦ ──</div>
+        <div class="body-text" style="margin-bottom:20px;">REI is growing faster than at any point in its 87-year history. New stores, new international markets, new product categories — and all of it converging on a single spring launch window led by your Anniversary Sale.</div>
+
+        <div class="stat-col">
+          <div class="stat-item">
+            <div class="stat-lbl">Annual Revenue</div>
+            <div class="stat-big">$4B+</div>
+            <div class="stat-desc">And accelerating. The co-op's omnichannel expansion is driving revenue at a pace the organization has never seen.</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-lbl">Co-op Members</div>
+            <div class="stat-big">25M</div>
+            <div class="stat-desc">Each one expecting the right gear, in their size, at their store — on launch day.</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-lbl">Retail Stores — and counting</div>
+            <div class="stat-big">180+</div>
+            <div class="stat-desc">Each store is a new layer of launch complexity: SKU allocation, visual merchandising, local inventory — all needing to be coordinated in parallel.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--green);padding:18px 20px;margin-top:20px;">
+        <div class="eyebrow" style="color:var(--tan-light);margin-bottom:8px;">The date that matters</div>
+        <div style="font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:var(--tan);line-height:1;">May 16</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,232,0.7);">REI Anniversary Sale · <span id="pg3-days">54</span> days from today</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Product image editorial grid -->
+    <div class="editorial-right">
+      <div class="eyebrow" style="margin-bottom:16px;">Spring 2026 Launch Products — REI Co-op</div>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-stamp">New ↗</div>
+          <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=300&q=70" alt="Camping tent" onerror="this.parentElement.style.background='var(--green)'"/>
+          <div class="product-card-label">
+            <div class="product-card-name">Trail Dome 2P</div>
+            <div class="product-card-price">$299</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1501554728187-ce583db33af7?w=300&q=70" alt="Hiker with backpack on trail" onerror="this.style.display='none';this.parentElement.style.background='var(--green)';"/>
+          <div class="product-card-label">
+            <div class="product-card-name">Flash 22 Pack</div>
+            <div class="product-card-price">$89</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-stamp">Best Seller ★</div>
+          <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&q=70" alt="Jacket outdoors" onerror="this.parentElement.style.background='var(--green)'"/>
+          <div class="product-card-label">
+            <div class="product-card-name">Trailbreak Hoodie</div>
+            <div class="product-card-price">$149</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img id="pants-img" src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=300&q=70" alt="Couple hiking mountains pants" style="width:100%;height:130px;object-fit:cover;filter:sepia(15%) contrast(1.05);"/>
+          <div class="product-card-label">
+            <div class="product-card-name">Sahara Shade Pants</div>
+            <div class="product-card-price">$99</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(196,149,106,0.3);">
+        <div class="pull-quote" style="font-size:16px;">"A single REI Co-op SKU touches an average of 9 systems between concept and live."</div>
+        <div class="caption" style="margin-top:8px;">Airtable Field Intelligence — Spring 2026 Assessment</div>
+      </div>
+
+      <div style="display:flex;gap:16px;margin-top:16px;">
+        <div style="flex:1;text-align:center;border:1px solid rgba(196,149,106,0.3);padding:12px 8px;">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--rust);">100+</div>
+          <div class="caption">Vendor relationships</div>
+        </div>
+        <div style="flex:1;text-align:center;border:1px solid rgba(196,149,106,0.3);padding:12px 8px;">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--rust);">30–40%</div>
+          <div class="caption">Of launch time = coordination</div>
+        </div>
+        <div style="flex:1;text-align:center;border:1px solid rgba(196,149,106,0.3);padding:12px 8px;">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--rust);">2×</div>
+          <div class="caption">Longer without structured records</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-num">03 — The State of REI</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 4: THE THREE GAPS (Photo obstacles)
+══════════════════════════════════════ -->
+<div class="cat-page">
+  <div class="obstacles-page">
+    <div class="eyebrow">Terrain Assessment</div>
+    <div class="section-title" style="margin-top:8px;">Three gaps between where<br>you are and <em>where you should be.</em></div>
+    <div class="body-text" style="max-width:600px;margin-top:10px;">Every REI launch crosses the same three terrain obstacles. Here's what each one costs you — and what clears the path before May 16.</div>
+
+    <div class="obstacles-grid">
+      <!-- Gap 1 -->
+      <div class="obstacle-card">
+        <div class="obstacle-img-wrap">
+          <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=400&q=70" alt="Mountain camp scattered gear" onerror="this.style.background='var(--green)'"/>
+          <div class="obstacle-img-overlay"></div>
+          <div class="obstacle-icon-badge">🗺️</div>
+        </div>
+        <div class="obstacle-content">
+          <div class="obstacle-title">Fragmented data</div>
+          <div class="obstacle-body">A single SKU touches PLM, vendor email, QC sheets, Slack, inventory systems, creative briefs, and PDP content — before it ever goes live. Agents can't reason across a fragmented landscape. They need one structured trail to follow.</div>
+          <div class="obstacle-cost">Trail cost: Every agent needs a human to connect the dots manually</div>
+        </div>
+      </div>
+
+      <!-- Gap 2 -->
+      <div class="obstacle-card">
+        <div class="obstacle-img-wrap">
+          <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=400&q=70" alt="Person reading map trail" onerror="this.style.background='var(--green)'"/>
+          <div class="obstacle-img-overlay"></div>
+          <div class="obstacle-icon-badge">🪓</div>
+        </div>
+        <div class="obstacle-content">
+          <div class="obstacle-title">Deployment bottlenecks</div>
+          <div class="obstacle-body">Your product team knows exactly what the launch needs. But when they want to automate a vendor follow-up or launch milestone check, they're filing an IT ticket. The people closest to the work can't build the tools that run it.</div>
+          <div class="obstacle-cost">Trail cost: 2–3 week lag between identifying a problem and solving it</div>
+        </div>
+      </div>
+
+      <!-- Gap 3 -->
+      <div class="obstacle-card">
+        <div class="obstacle-img-wrap">
+          <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&q=70" alt="Ranger binoculars mountain view" onerror="this.style.background='var(--green)'"/>
+          <div class="obstacle-img-overlay"></div>
+          <div class="obstacle-icon-badge">🔭</div>
+        </div>
+        <div class="obstacle-content">
+          <div class="obstacle-title">Governance gaps</div>
+          <div class="obstacle-body">At REI, where every decision carries co-op accountability, agent output gets manually checked before anyone acts. Without observability baked in, every agent needs a babysitter — and trust never scales.</div>
+          <div class="obstacle-cost">Trail cost: 2× longer output verification without structured records</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-box">
+      <div class="checklist-title">Before May 16 — is your team equipped for this?</div>
+      <div class="check-grid">
+        <div class="check-item"><div class="check-box">☐</div><span>A single structured record every agent can reason across</span></div>
+        <div class="check-item"><div class="check-box">☐</div><span>Domain experts building automations without IT tickets</span></div>
+        <div class="check-item"><div class="check-box">☐</div><span>Every agent action visible and reversible before it's final</span></div>
+        <div class="check-item"><div class="check-box">☐</div><span>Vendor confirmations tracked in one place, not email chains</span></div>
+        <div class="check-item"><div class="check-box">☐</div><span>Agents accountable to the co-op governance model</span></div>
+        <div class="check-item"><div class="check-box">☐</div><span>Launch readiness visible to everyone — not just one spreadsheet owner</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-num">04 — The Three Gaps</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 5: GEAR PRODUCTS (Field Agents)
+══════════════════════════════════════ -->
+<div class="cat-page">
+  <div class="gear-page">
+    <div class="gear-intro-row">
+      <div>
+        <div class="eyebrow">New for Spring 2026</div>
+        <div class="section-title" style="margin-top:8px;">The Field Agent<br><em>collection.</em></div>
+        <div class="ornament">── ✦ ──</div>
+        <div class="body-text">Three instruments built for the terrain your product team crosses every launch. Each one closes a gap your current setup leaves open — and each one is deployed by the people who know the work, not by engineering.</div>
+      </div>
+      <div style="background:var(--cream-dark);border:1.5px solid var(--tan);padding:20px 22px;">
+        <div class="eyebrow" style="margin-bottom:10px;">How they're built</div>
+        <div class="body-text" style="font-size:14px;margin-bottom:12px;">Each Field Agent is deployed using <strong>Omni</strong> — Airtable's plain-language interface that lets your team describe a workflow and have an agent built to run it. No code. No tickets. No waiting on engineering.</div>
+        <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:12px 14px;font-family:'DM Mono',monospace;font-size:11px;color:#374151;line-height:1.7;">
+          <span style="color:var(--blue);font-weight:500;">Omni prompt example:</span><br>
+          "Every time a vendor misses a QC deadline by 48 hours, send them a follow-up email, log the delay in the SKU tracker, and notify Alex."<br>
+          <span style="color:var(--teal);">→ Agent deployed. No dev required.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gear-cards-row">
+      <!-- Gear 1: Trail Map -->
+      <div class="gear-card-v2">
+        <div class="gear-img-area">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="36" fill="none" stroke="var(--tan)" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="28" fill="none" stroke="var(--tan)" stroke-width="1" opacity="0.6"/>
+            <circle cx="40" cy="40" r="20" fill="none" stroke="var(--tan)" stroke-width="0.8" opacity="0.4"/>
+            <circle cx="40" cy="40" r="12" fill="none" stroke="var(--tan)" stroke-width="0.6" opacity="0.3"/>
+            <circle cx="40" cy="40" r="4" fill="var(--rust)" opacity="0.8"/>
+            <path d="M14,28 Q22,20 30,28 Q38,36 46,22 Q54,10 62,24" fill="none" stroke="var(--rust)" stroke-width="1.5" opacity="0.7"/>
+            <line x1="40" y1="4" x2="40" y2="76" stroke="var(--tan)" stroke-width="0.5" opacity="0.25" stroke-dasharray="2,4"/>
+            <line x1="4" y1="40" x2="76" y2="40" stroke="var(--tan)" stroke-width="0.5" opacity="0.25" stroke-dasharray="2,4"/>
+            <text x="40" y="76" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" fill="var(--tan-light)" opacity="0.8">TRAIL MAP</text>
+          </svg>
+        </div>
+        <div class="gear-body">
+          <div class="gear-name">The Trail Map</div>
+          <div class="gear-category">Agent-First System of Record</div>
+          <div class="gear-desc">Before you set out, you need to know the terrain. The Trail Map gives your agents structured, current, relational context across every SKU, vendor, and milestone — all connected, all current, all in one place. Your agents stop guessing and start logging.</div>
+          <div class="gear-spec">Coverage: full product lifecycle<br>Scale: 180+ stores, 100+ vendors<br>Available in: rain, peak season, global vendor networks</div>
+        </div>
+      </div>
+
+      <!-- Gear 2: Base Camp Radio -->
+      <div class="gear-card-v2">
+        <div class="gear-img-area">
+          <svg width="70" height="80" viewBox="0 0 70 80">
+            <rect x="14" y="12" width="42" height="58" rx="5" fill="none" stroke="var(--tan)" stroke-width="2"/>
+            <rect x="18" y="16" width="34" height="22" rx="2" fill="var(--green-mid)" opacity="0.4"/>
+            <circle cx="35" cy="29" r="6" fill="none" stroke="var(--tan)" stroke-width="1.5"/>
+            <circle cx="35" cy="29" r="2" fill="var(--tan)"/>
+            <rect x="20" y="44" width="30" height="4" rx="2" fill="var(--tan)" opacity="0.7"/>
+            <rect x="20" y="52" width="18" height="3" rx="1.5" fill="var(--tan)" opacity="0.5"/>
+            <rect x="20" y="59" width="24" height="3" rx="1.5" fill="var(--tan)" opacity="0.4"/>
+            <line x1="35" y1="12" x2="35" y2="4" stroke="var(--tan)" stroke-width="2"/>
+            <line x1="31" y1="4" x2="39" y2="4" stroke="var(--tan)" stroke-width="2"/>
+            <text x="35" y="78" text-anchor="middle" font-family="'DM Mono',monospace" font-size="5.5" fill="var(--tan-light)" opacity="0.8">BASE CAMP RADIO</text>
+          </svg>
+        </div>
+        <div class="gear-body">
+          <div class="gear-name">The Base Camp Radio</div>
+          <div class="gear-category">Built for People Who Know the Work</div>
+          <div class="gear-desc">The people who know the route should be calling it. Deploy and brief agents by describing the task in plain language — no developer, no ticket, no waiting. If your product team can describe a launch milestone, they can build the agent that tracks it.</div>
+          <div class="gear-spec">Range: org-wide<br>Frequency: zero IT bottlenecks<br>Compatible with: anyone who's run a product launch</div>
+        </div>
+      </div>
+
+      <!-- Gear 3: Summit Scope -->
+      <div class="gear-card-v2">
+        <div class="gear-img-area">
+          <svg width="80" height="70" viewBox="0 0 80 70">
+            <rect x="6" y="24" width="60" height="16" rx="3" fill="none" stroke="var(--tan)" stroke-width="2"/>
+            <rect x="10" y="27" width="24" height="10" rx="1.5" fill="var(--green-mid)" opacity="0.35"/>
+            <circle cx="70" cy="32" r="10" fill="none" stroke="var(--tan)" stroke-width="1.5"/>
+            <circle cx="70" cy="32" r="6" fill="none" stroke="var(--tan)" stroke-width="0.8" opacity="0.6"/>
+            <line x1="65" y1="32" x2="75" y2="32" stroke="var(--rust)" stroke-width="1" opacity="0.7"/>
+            <line x1="70" y1="27" x2="70" y2="37" stroke="var(--rust)" stroke-width="1" opacity="0.7"/>
+            <line x1="6" y1="40" x2="16" y2="62" stroke="var(--tan)" stroke-width="2"/>
+            <line x1="20" y1="40" x2="22" y2="62" stroke="var(--tan)" stroke-width="1.5"/>
+            <rect x="32" y="18" width="8" height="6" rx="2" fill="var(--tan)" opacity="0.6"/>
+            <text x="40" y="68" text-anchor="middle" font-family="'DM Mono',monospace" font-size="5.5" fill="var(--tan-light)" opacity="0.8">SUMMIT SCOPE</text>
+          </svg>
+        </div>
+        <div class="gear-body">
+          <div class="gear-name">The Summit Scope</div>
+          <div class="gear-category">Observability and Control</div>
+          <div class="gear-desc">In the field, you need to see what's happening before it becomes a crisis. The Summit Scope defines the boundaries within which agents operate — every update logged, every critical flag visible, every action reversible before it's final. Built for co-op accountability.</div>
+          <div class="gear-spec">Field of view: full agent activity log<br>Intervention window: before results are final<br>Accountability: built in — not bolted on after<br><br><em style="color:var(--ink);font-family:'Crimson Text',serif;font-size:11px;">REI's co-op model means every decision carries member accountability. The Summit Scope is built for exactly that — agents that show their work before it becomes final, so your team can trust what's running.</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gear-combo-box">
+      <div class="eyebrow" style="color:var(--tan-light);margin-bottom:8px;">How they work together on your launch</div>
+      <div class="body-text" style="color:rgba(245,240,232,0.85);font-size:14px;line-height:1.7;">The Trail Map gives agents the structured context they need. The Base Camp Radio lets your product team deploy them without engineering. The Summit Scope ensures every critical update is logged and every agent action is visible before it becomes final. Together, they turn your Anniversary Sale from a coordination exercise into a reliable, accountable system — run by the people who know the launch best.</div>
+    </div>
+  </div>
+  <div class="pg-num">05 — The Field Agent Collection</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 6: OS PREVIEW + QR
+══════════════════════════════════════ -->
+<div class="cat-page">
+  <div class="os-preview-page">
+    <div class="eyebrow">Built with Omni · Powered by Field Agents</div>
+    <div class="section-title" style="margin-top:8px;margin-bottom:8px;">Your custom REI Launch OS —<br><em>built for the team closest to the work.</em></div>
+    <div class="body-text" style="margin-bottom:28px;max-width:600px;">What follows is a live simulation of your Anniversary Sale launch running on Airtable. Every tab, every agent, every record — built using Omni and deployed as Field Agents specifically for REI's workflow. May 16 is <span id="pg6-days">54</span> days away. Scan to explore it yourself.</div>
+
+    <div class="os-preview-grid">
+      <div class="os-preview-left">
+        <!-- Interactive preview tabs -->
+        <div class="at-preview">
+          <div class="at-preview-header">
+            <svg width="14" height="14" viewBox="0 0 32 32"><rect width="32" height="32" rx="5" fill="#1F6FEB"/><text x="5" y="22" font-size="16" fill="white">⬡</text></svg>
+            <div class="at-preview-title">REI Launch OS — Anniversary Sale 2026</div>
+          </div>
+          <div class="at-preview-tabs">
+            <button class="at-prev-tab active" onclick="prevTab('sku',this)">SKU Tracker</button>
+            <button class="at-prev-tab" onclick="prevTab('vendor',this)">Vendor Board</button>
+            <button class="at-prev-tab" onclick="prevTab('cal',this)">Launch Calendar</button>
+            <button class="at-prev-tab" onclick="prevTab('log',this)">Agent Log</button>
+          </div>
+          <div class="at-prev-body">
+            <!-- SKU Tab -->
+            <div class="at-prev-content active" id="prev-sku">
+              <div class="prev-row">
+                <div class="prev-cell hdr flex1">Product</div>
+                <div class="prev-cell hdr">Status</div>
+                <div class="prev-cell hdr">Vendor</div>
+              </div>
+              <div class="prev-row">
+                <div class="prev-cell flex1">Trail Dome 2P</div>
+                <div class="prev-tag tag-g">✓ Approved</div>
+                <div class="prev-cell">PNW Supply</div>
+              </div>
+              <div class="prev-row">
+                <div class="prev-cell flex1" style="color:#991B1B;">Trailbreak Hoodie</div>
+                <div class="prev-tag tag-r">⚠ Flagged</div>
+                <div class="prev-cell">Rainier Mfg</div>
+              </div>
+              <div class="prev-row">
+                <div class="prev-cell flex1">Flash 22 Pack</div>
+                <div class="prev-tag tag-y">In Review</div>
+                <div class="prev-cell">Cascade Tex</div>
+              </div>
+              <div class="prev-row">
+                <div class="prev-cell flex1">Sahara Shade Pants</div>
+                <div class="prev-tag tag-g">✓ Approved</div>
+                <div class="prev-cell">Summit Fab</div>
+              </div>
+              <div class="agent-note">⚠ Quality Gate Agent: Trailbreak Hoodie — lead time risk. Rainier Mfg overdue 3 days. Follow-up sent automatically.</div>
+            </div>
+            <!-- Vendor Tab -->
+            <div class="at-prev-content" id="prev-vendor">
+              <div class="prev-kanban">
+                <div>
+                  <div class="prev-kcol-hdr">Outreach</div>
+                  <div class="prev-kcard" style="border-left:2px solid #F59E0B;">
+                    <div class="prev-kcard-name">Rainier Mfg</div>
+                    <div class="prev-kcard-agent" style="color:#F59E0B;">⚠ Overdue 3d</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="prev-kcol-hdr">Confirmed</div>
+                  <div class="prev-kcard"><div class="prev-kcard-name">Cascade Textiles</div><div class="prev-kcard-agent">✓ Confirmed</div></div>
+                  <div class="prev-kcard"><div class="prev-kcard-name">Olympic Works</div><div class="prev-kcard-agent">✓ Confirmed</div></div>
+                </div>
+                <div>
+                  <div class="prev-kcol-hdr">QC Done</div>
+                  <div class="prev-kcard"><div class="prev-kcard-name">Summit Fabrics</div><div class="prev-kcard-agent">✓ QC passed</div></div>
+                </div>
+                <div>
+                  <div class="prev-kcol-hdr">Ready</div>
+                  <div class="prev-kcard" style="border-color:#6EE7B7;"><div class="prev-kcard-name">PNW Supply Co.</div><div class="prev-kcard-agent">✓ Launch ready</div></div>
+                </div>
+              </div>
+            </div>
+            <!-- Calendar Tab -->
+            <div class="at-prev-content" id="prev-cal">
+              <div class="prev-timeline">
+                <div class="prev-tl-item">
+                  <div class="prev-tl-dot done"></div>
+                  <div class="prev-tl-content"><div class="prev-tl-date">Mar 15 — Complete</div><div class="prev-tl-title">SKU Lock · Inventory Intelligence Agent</div></div>
+                </div>
+                <div class="prev-tl-item">
+                  <div class="prev-tl-dot" style="background:#F59E0B;box-shadow:0 0 0 2px #F59E0B;"></div>
+                  <div class="prev-tl-content"><div class="prev-tl-date">Apr 1 — At Risk</div><div class="prev-tl-title">Vendor QC Complete · Quality Gate Agent</div></div>
+                </div>
+                <div class="prev-tl-item">
+                  <div class="prev-tl-dot"></div>
+                  <div class="prev-tl-content"><div class="prev-tl-date">Apr 15</div><div class="prev-tl-title">Store Allocation · Inventory Intelligence Agent</div></div>
+                </div>
+                <div class="prev-tl-item">
+                  <div class="prev-tl-dot"></div>
+                  <div class="prev-tl-content"><div class="prev-tl-date">May 9</div><div class="prev-tl-title">Campaign Assets Live · Campaign Bridge Agent</div></div>
+                </div>
+                <div class="prev-tl-item">
+                  <div class="prev-tl-dot" style="background:var(--teal);box-shadow:0 0 0 2px var(--teal);width:18px;height:18px;left:-25px;top:1px;"></div>
+                  <div class="prev-tl-content"><div class="prev-tl-date" style="color:var(--teal);font-weight:600;">May 16 — LAUNCH 🎯</div><div class="prev-tl-title" style="font-size:12px;">REI Anniversary Sale</div></div>
+                </div>
+              </div>
+            </div>
+            <!-- Log Tab -->
+            <div class="at-prev-content" id="prev-log">
+              <div class="prev-log">
+                <div class="prev-log-row warn">
+                  <div class="prev-log-agent">Quality Gate Agent</div>
+                  <div class="prev-log-text">Trailbreak Hoodie flagged. Lead time risk logged to SKU tracker. Rainier Mfg follow-up sent.</div>
+                  <div class="prev-log-time">2h ago</div>
+                </div>
+                <div class="prev-log-row ok">
+                  <div class="prev-log-agent">Vendor Liaison Agent</div>
+                  <div class="prev-log-text">Cascade Textiles QC completion logged. Flash 22 Pack record updated automatically.</div>
+                  <div class="prev-log-time">4h ago</div>
+                </div>
+                <div class="prev-log-row ok">
+                  <div class="prev-log-agent">Inventory Agent</div>
+                  <div class="prev-log-text">Hydration Vest 12L allocated across 180 store locations. Source of truth updated.</div>
+                  <div class="prev-log-time">6h ago</div>
+                </div>
+                <div class="prev-log-row">
+                  <div class="prev-log-agent">Launch Coordinator</div>
+                  <div class="prev-log-text">Weekly readiness report logged: 87% complete. Critical path: Rainier Mfg QC.</div>
+                  <div class="prev-log-time">1d ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--cream-dark);border:1px solid rgba(196,149,106,0.3);padding:14px 16px;margin-top:14px;">
+          <div class="caption" style="margin-bottom:6px;">What you're looking at</div>
+          <div class="body-text" style="font-size:13px;">A live simulation of the REI Anniversary Sale launch running on Airtable. Each tab is a working view built by your product team using Omni — no engineering required. The agents log every critical update automatically, creating a reliable source of truth your whole team can trust.</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: QR -->
+      <div class="os-preview-right">
+        <div class="expedition-badge">
+          <div class="qr-cta-text">Open your<br><em style="font-style:italic;color:var(--green);">Launch OS</em></div>
+          <div class="qr-cta-sub">May 16 is <span id="pg6-days-2">54</span> days away. Scan or click to see your custom agents running live.</div>
+
+          <div style="position:relative;display:inline-block;margin:12px 0;">
+            <svg width="180" height="180" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="96" fill="none" stroke="var(--rust)" stroke-width="2"/>
+              <circle cx="100" cy="100" r="89" fill="none" stroke="var(--tan)" stroke-width="0.8" stroke-dasharray="4,6"/>
+              <path id="tArc" d="M 18,100 A 82,82 0 0,1 182,100" fill="none"/>
+              <text font-family="'DM Mono',monospace" font-size="8.5" letter-spacing="3.5" fill="var(--rust)" text-anchor="middle">
+                <textPath href="#tArc" startOffset="50%">AIRTABLE FIELD INTELLIGENCE</textPath>
+              </text>
+              <path id="bArc" d="M 18,100 A 82,82 0 0,0 182,100" fill="none"/>
+              <text font-family="'DM Mono',monospace" font-size="8.5" letter-spacing="2.5" fill="var(--rust)" text-anchor="middle">
+                <textPath href="#bArc" startOffset="50%">REI SPRING 2026 ✦ SEATTLE WA</textPath>
+              </text>
+              <text x="18" y="104" font-size="10" fill="var(--tan)">✦</text>
+              <text x="172" y="104" font-size="10" fill="var(--tan)">✦</text>
+              <foreignObject x="58" y="58" width="84" height="84">
+                <div xmlns="http://www.w3.org/1999/xhtml" onclick="openOS()" style="cursor:pointer;">
+                  <svg viewBox="0 0 100 100" style="width:84px;height:84px;">
+                    <rect width="100" height="100" fill="var(--cream-dark)"/>
+                    <rect x="5" y="5" width="28" height="28" fill="none" stroke="var(--rust)" stroke-width="2.5"/>
+                    <rect x="9" y="9" width="20" height="20" fill="none" stroke="var(--rust)" stroke-width="1.5"/>
+                    <rect x="13" y="13" width="12" height="12" fill="var(--rust)"/>
+                    <rect x="67" y="5" width="28" height="28" fill="none" stroke="var(--rust)" stroke-width="2.5"/>
+                    <rect x="71" y="9" width="20" height="20" fill="none" stroke="var(--rust)" stroke-width="1.5"/>
+                    <rect x="75" y="13" width="12" height="12" fill="var(--rust)"/>
+                    <rect x="5" y="67" width="28" height="28" fill="none" stroke="var(--rust)" stroke-width="2.5"/>
+                    <rect x="9" y="71" width="20" height="20" fill="none" stroke="var(--rust)" stroke-width="1.5"/>
+                    <rect x="13" y="75" width="12" height="12" fill="var(--rust)"/>
+                    <rect x="38" y="5" width="5" height="5" fill="var(--rust)"/><rect x="48" y="5" width="5" height="5" fill="var(--rust)"/>
+                    <rect x="38" y="38" width="5" height="5" fill="var(--rust)"/><rect x="53" y="43" width="5" height="5" fill="var(--rust)"/>
+                    <rect x="38" y="48" width="5" height="5" fill="var(--rust)"/><rect x="63" y="48" width="5" height="5" fill="var(--rust)"/>
+                    <rect x="48" y="58" width="5" height="5" fill="var(--rust)"/><rect x="67" y="38" width="5" height="5" fill="var(--rust)"/>
+                    <rect x="82" y="43" width="5" height="5" fill="var(--rust)"/><rect x="38" y="67" width="5" height="5" fill="var(--rust)"/>
+                    <rect x="53" y="72" width="5" height="5" fill="var(--rust)"/><rect x="67" y="77" width="5" height="5" fill="var(--rust)"/>
+                    <rect x="82" y="67" width="5" height="5" fill="var(--rust)"/><rect x="87" y="87" width="5" height="5" fill="var(--rust)"/>
+                  </svg>
+                </div>
+              </foreignObject>
+            </svg>
+          </div>
+
+          <button class="qr-scan-btn" onclick="openOS()">Open Launch OS — Scroll Down ↓</button>
+          <div class="caption" style="margin-top:10px;text-align:center;">airtable.com/rei-launch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-num">06 — Your Custom Launch OS Preview</div>
+</div>
+
+</div><!-- end catalog -->
+
+
+<!-- ══════════════════════════════════════
+     TRANSITION
+══════════════════════════════════════ -->
+<div class="transition-section" id="launch-os-entry">
+  <div class="transition-label">You scanned the catalog. Here's what's waiting for you.</div>
+  <div class="transition-title">This is the digital experience<br><em>behind the catalog.</em></div>
+  <div class="transition-sub">The catalog showed you the gaps. This is what it looks like when Airtable closes them — a live simulation of your Anniversary Sale launch, built for REI's product team.</div>
+  <div class="transition-arrow">↓</div>
+  <div class="transition-arrow" style="margin-top:-20px;opacity:0.5;font-size:32px;">↓</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     LAUNCH OS
+══════════════════════════════════════ -->
+<div id="launch-os" style="width:100%;">
+
+  <!-- Sticky bar -->
+  <div class="sticky-bar">
+    <div class="sticky-clock" id="sticky-clock">54d 00h 00m 00s</div>
+    <div class="sticky-label">until REI's Anniversary Sale — May 16, 2026</div>
+    <button class="sticky-cta" onclick="document.getElementById('os-interface-wrap').scrollIntoView({behavior:'smooth'})">Open Launch OS →</button>
+  </div>
+
+  <!-- Countdown -->
+  <div class="cd-section">
+    <div class="cd-eyebrow">REI Co-op × Airtable — Custom Launch Intelligence</div>
+    <div class="cd-title">Your Anniversary Sale is<br><em><span id="cd-days-text">54</span> days out.</em></div>
+    <div class="cd-clock">
+      <div class="cd-unit"><span class="cd-num" id="cd-days">54</span><span class="cd-lbl">Days</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-hours">00</span><span class="cd-lbl">Hours</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-mins">00</span><span class="cd-lbl">Minutes</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-secs">00</span><span class="cd-lbl">Seconds</span></div>
+    </div>
+    <div class="cd-sub">Here's what it looks like when your product team — not engineering — builds the agents that close the gap.</div>
+  </div>
+
+
+
+  <!-- Split screen -->
+  <div class="split-section">
+    <div class="split-heading">6 disconnected tools.<br>Or one surface that connects them.</div>
+    <div class="split-sub">Without Airtable, status lives in Slack, Jira, email, and spreadsheets — and your team spends their day bridging the gaps. With Airtable, agents bridge the gaps and post the status so your team doesn't have to.</div>
+    <div class="split-grid">
+      <div>
+        <div class="split-lbl chaos">🔥 Right now — 6 systems, no connection</div>
+        <div class="chaos-panel" style="border-radius:0 0 8px 8px;padding:10px 12px;overflow-y:auto;max-height:420px;">
+          <!-- Tool badges -->
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;">
+            <div style="background:#4A154B;border-radius:4px;padding:3px 7px;font-family:'DM Mono',monospace;font-size:8px;color:white;">💬 Slack</div>
+            <div style="background:#0052CC;border-radius:4px;padding:3px 7px;font-family:'DM Mono',monospace;font-size:8px;color:white;">🔷 Jira</div>
+            <div style="background:#1A73E8;border-radius:4px;padding:3px 7px;font-family:'DM Mono',monospace;font-size:8px;color:white;">✉️ Gmail</div>
+            <div style="background:#0F4C3A;border-radius:4px;padding:3px 7px;font-family:'DM Mono',monospace;font-size:8px;color:#86efac;">📊 Sheets</div>
+            <div style="background:#1D2125;border-radius:4px;padding:3px 7px;font-family:'DM Mono',monospace;font-size:8px;color:#9fadbc;">📦 Notion</div>
+            <div style="background:#B04800;border-radius:4px;padding:3px 7px;font-family:'DM Mono',monospace;font-size:8px;color:white;">📋 Airtable</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">No shared context. Everyone's the source of truth.</div>
+
+          <!-- Jira board mini -->
+          <div style="background:#0052CC10;border:1px solid #0052CC30;border-radius:5px;padding:8px;margin-bottom:7px;">
+            <div style="font-family:'DM Mono',monospace;font-size:8px;color:#0052CC;font-weight:700;margin-bottom:6px;">🔷 JIRA — REI SPRING LAUNCH</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
+              <div>
+                <div style="font-family:'DM Mono',monospace;font-size:7px;color:#64748b;text-transform:uppercase;margin-bottom:3px;">To Do</div>
+                <div style="background:#1E293B;border-radius:3px;padding:4px 5px;margin-bottom:3px;"><div style="font-size:9px;color:#94a3b8;">SKU image review</div><div style="font-size:8px;color:#64748b;">Unassigned</div></div>
+                <div style="background:#1E293B;border-radius:3px;padding:4px 5px;"><div style="font-size:9px;color:#94a3b8;">PDP copy</div><div style="font-size:8px;color:#64748b;">Unassigned</div></div>
+              </div>
+              <div>
+                <div style="font-family:'DM Mono',monospace;font-size:7px;color:#64748b;text-transform:uppercase;margin-bottom:3px;">In Progress</div>
+                <div style="background:#1E293B;border-radius:3px;padding:4px 5px;margin-bottom:3px;border-left:2px solid #F59E0B;"><div style="font-size:9px;color:#FDE68A;">Vendor QC — 3d</div><div style="font-size:8px;color:#F59E0B;">⚠ Overdue</div></div>
+                <div style="background:#1E293B;border-radius:3px;padding:4px 5px;border-left:2px solid #F59E0B;"><div style="font-size:9px;color:#FDE68A;">Store alloc — 5d</div><div style="font-size:8px;color:#F59E0B;">⚠ Overdue</div></div>
+              </div>
+              <div>
+                <div style="font-family:'DM Mono',monospace;font-size:7px;color:#64748b;text-transform:uppercase;margin-bottom:3px;">Blocked</div>
+                <div style="background:#1E293B;border-radius:3px;padding:4px 5px;margin-bottom:3px;border-left:2px solid #EF4444;"><div style="font-size:9px;color:#FCA5A5;">Trailbreak QC</div><div style="font-size:8px;color:#EF4444;">🚨 Blocked</div></div>
+                <div style="background:#1E293B;border-radius:3px;padding:4px 5px;border-left:2px solid #EF4444;"><div style="font-size:9px;color:#FCA5A5;">Campaign brief</div><div style="font-size:8px;color:#EF4444;">🚨 Blocked</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inbox pile -->
+          <div style="background:#1A73E810;border:1px solid #1A73E830;border-radius:5px;padding:8px;margin-bottom:7px;">
+            <div style="font-family:'DM Mono',monospace;font-size:8px;color:#1A73E8;font-weight:700;margin-bottom:5px;">✉️ GMAIL — 23 UNREAD VENDOR EMAILS</div>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <div style="display:flex;justify-content:space-between;padding:3px 5px;background:#1E293B;border-radius:3px;"><span style="font-size:9px;color:#FCA5A5;font-weight:600;">Rainier Mfg — Re: Spring order (3rd follow-up)</span><span style="font-size:8px;color:#EF4444;">3d ago</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 5px;background:#1E293B;border-radius:3px;"><span style="font-size:9px;color:#94a3b8;">Summit Fabrics — QC complete confirmation</span><span style="font-size:8px;color:#64748b;">1d ago</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 5px;background:#1E293B;border-radius:3px;"><span style="font-size:9px;color:#94a3b8;">Cascade Tex — Revised delivery dates</span><span style="font-size:8px;color:#64748b;">2d ago</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 5px;background:#1E293B;border-radius:3px;opacity:0.6;"><span style="font-size:9px;color:#64748b;">+ 20 more unread...</span><span style="font-size:8px;color:#64748b;"></span></div>
+            </div>
+          </div>
+
+          <!-- Slack chaos -->
+          <div class="slack-msg" style="margin-bottom:3px;"><div class="slack-av" style="background:#4A154B;width:20px;height:20px;font-size:9px;">🙍</div><div><div class="slack-name" style="font-size:8px;">alex.chen</div><div class="slack-text" style="font-size:9px;">Which sheet is current — FINAL_v3 or FINAL_FINAL?? Jira isn't updated</div></div></div>
+          <div class="slack-msg"><div class="slack-av" style="background:#2BAC76;width:20px;height:20px;font-size:9px;">👩</div><div><div class="slack-name" style="font-size:8px;">priya.m</div><div class="slack-text slack-urgent" style="font-size:9px;">Did anyone respond to Rainier Mfg?? 3 days no reply 🚨</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="split-lbl clarity">✅ With Airtable — one surface, agent posts to Slack automatically</div>
+        <div class="clarity-panel" style="border-radius:0 0 8px 8px;min-height:360px;">
+          <!-- Airtable OS header -->
+          <div class="at-hdr">
+            <svg width="14" height="14" viewBox="0 0 32 32"><rect width="32" height="32" rx="5" fill="#1F6FEB"/><text x="5" y="22" font-size="16" fill="white">⬡</text></svg>
+            <div class="at-base-name">REI Launch OS — Anniversary Sale 2026</div>
+            <div class="agent-badge"><div class="agent-dot-live"></div>Agents logging</div>
+          </div>
+          <div class="at-record"><span style="font-weight:600;flex:2;">Trail Dome 2P</span><span class="at-stag stag-g">✓ Confirmed</span><span style="font-size:10px;color:#9CA3AF;">PNW Supply</span></div>
+          <div class="at-record"><span style="font-weight:600;flex:2;color:#991B1B;">Trailbreak Hoodie</span><span class="at-stag stag-r">Risk Flagged</span><span style="font-size:10px;color:#9CA3AF;">Rainier Mfg</span></div>
+          <div class="at-flag">⚠ Quality Gate Agent: risk logged, follow-up sent, Alex notified.</div>
+          <!-- Readiness meter -->
+          <div class="meter-wrap" style="margin-bottom:10px;">
+            <div class="meter-lbl">LAUNCH READINESS — 87% · 54 DAYS TO MAY 16</div>
+            <div class="meter-track"><div class="meter-fill" id="meter-fill"></div></div>
+          </div>
+          <!-- Divider -->
+          <div style="border-top:1px solid #F1F3F8;margin:10px 0 8px;"></div>
+          <!-- Agent generating Slack post -->
+          <div style="font-family:'DM Mono',monospace;font-size:8px;color:#00A98F;font-weight:700;display:flex;align-items:center;gap:5px;margin-bottom:6px;">
+            <div style="width:5px;height:5px;border-radius:50%;background:#00A98F;animation:ap 1.5s ease infinite;flex-shrink:0;"></div>
+            Launch Coordinator Agent — posting to #launch-execs
+          </div>
+          <div style="background:#1E1E1E;border-radius:6px;padding:10px 12px;">
+            <div style="display:flex;gap:8px;align-items:flex-start;">
+              <div style="width:24px;height:24px;border-radius:5px;background:linear-gradient(135deg,#1F6FEB,#00A98F);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;">⬡</div>
+              <div>
+                <div style="font-family:'DM Mono',monospace;font-size:9px;color:#94a3b8;margin-bottom:4px;">Airtable Launch Agent · Today 8:00 AM · #launch-execs</div>
+                <div style="font-family:'DM Sans',sans-serif;font-size:10px;color:#e2e8f0;line-height:1.6;"><span style="color:#6EE7B7;font-weight:600;">📊 Weekly Launch Digest — Anniversary Sale 2026</span><br>
+                  📦 Vendor status: 47/52 confirmed · 1 risk (Rainier Mfg)<br>
+                  🎯 Launch readiness: 87% · T-54 days to May 16<br>
+                  ⚠️ Trailbreak Hoodie QC at risk — follow-up sent automatically<br>
+                  ✅ No exec action required on remaining items<br>
+                  <span style="color:#94a3b8;font-size:9px;">Auto-generated by Airtable · Source of truth updated · <span style="color:#6EE7B7;">View full OS →</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OS Interface -->
+  <div class="os-wrap" id="os-interface-wrap">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#6B7280;margin-bottom:6px;">Your custom REI Launch OS</div>
+    <div style="font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,34px);font-weight:700;color:#0F172A;margin-bottom:6px;line-height:1.15;">Every SKU tracked. Every vendor logged.<br>Every agent accountable.</div>
+    <div style="font-family:'Crimson Text',serif;font-size:16px;color:#6B7280;font-style:italic;margin-bottom:20px;">Built using Omni — deployed as Field Agents by your product team, for your Anniversary Sale.</div>
+
+    <!-- Omni + Field Agents explainer — integrated -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+      <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:18px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7B61FF,#1F6FEB);"></div>
+        <div style="display:inline-flex;align-items:center;gap:5px;background:#F8F9FC;border:1px solid var(--border);border-radius:100px;padding:3px 10px;font-family:'DM Mono',monospace;font-size:9px;color:#374151;margin-bottom:10px;">⬡ Airtable Product</div>
+        <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#0F172A;margin-bottom:6px;">Omni</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#6B7280;line-height:1.65;margin-bottom:10px;">Plain-language interface. Describe your workflow and Omni builds the base, views, and automations — no code, no tickets. Your product team describes it; Omni builds it.</div>
+        <div style="background:#F8F9FC;border-radius:6px;padding:10px 12px;font-family:'DM Mono',monospace;font-size:10px;color:#374151;line-height:1.6;"><span style="color:#1F6FEB;font-weight:600;">"Build me a vendor confirmation tracker"</span><br>→ Omni creates the base, fields, and views automatically.</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:18px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#00A98F,#1F6FEB);"></div>
+        <div style="display:inline-flex;align-items:center;gap:5px;background:#F8F9FC;border:1px solid var(--border);border-radius:100px;padding:3px 10px;font-family:'DM Mono',monospace;font-size:9px;color:#374151;margin-bottom:10px;">⚡ Airtable Product</div>
+        <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#0F172A;margin-bottom:6px;">Field Agents</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#6B7280;line-height:1.65;margin-bottom:10px;">Autonomous agents that log critical updates, flag risks before they become problems, and create a reliable source of truth — without needing oversight on every action.</div>
+        <div style="background:#F8F9FC;border-radius:6px;padding:10px 12px;font-family:'DM Mono',monospace;font-size:10px;color:#374151;line-height:1.6;"><span style="color:#00A98F;font-weight:600;">"If a vendor misses QC by 48hrs, follow up and log it."</span><br>→ Field Agent runs automatically. Every action in the Agent Log.</div>
+      </div>
+    </div>
+
+    <div class="os-interface">
+      <div class="os-int-header">
+        <svg width="16" height="16" viewBox="0 0 32 32"><rect width="32" height="32" rx="5" fill="#1F6FEB"/><text x="5" y="22" font-size="16" fill="white">⬡</text></svg>
+        <div class="os-int-title">REI Co-op — Anniversary Sale Launch OS</div>
+        <div class="os-int-badge" id="os-date-badge">May 16, 2026 · T-54 days</div>
+      </div>
+      <div class="os-tabs">
+        <button class="os-tab active" onclick="osTab('sku',event)">SKU Tracker</button>
+        <button class="os-tab" onclick="osTab('vendor',event)">Vendor Board</button>
+        <button class="os-tab" onclick="osTab('calendar',event)">Launch Calendar</button>
+        <button class="os-tab" onclick="osTab('log',event)">Agent Log</button>
+        <button class="os-tab" onclick="osTab('readiness',event)">🎯 Readiness</button>
+      </div>
+
+      <!-- SKU -->
+      <div class="os-content active" id="os-sku">
+        <table class="grid-tbl">
+          <thead><tr><th>Product</th><th>SKU</th><th>Category</th><th>Colorways</th><th>Vendor</th><th>QC Status</th><th>Launch Ready</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Trail Dome Tent 2P</strong></td><td style="font-family:'DM Mono',monospace;font-size:10px;">REI-TD2P-26</td><td>Camping</td><td>Rust / Forest / Stone</td><td>PNW Supply Co.</td><td><span class="at-stag stag-g">✓ Approved</span></td><td><span class="at-stag stag-g">Ready</span></td></tr>
+            <tr><td><strong>Trailbreak Down Hoodie</strong><div class="agent-flag-row">⚠ Quality Gate Agent: Lead time risk logged. Rainier Mfg response overdue 3 days. Auto follow-up sent. Escalation scheduled EOD if no response. Record updated with risk flag.</div></td><td style="font-family:'DM Mono',monospace;font-size:10px;">REI-TBH-26</td><td>Apparel</td><td>Midnight / Ember</td><td>Rainier Mfg.</td><td><span class="at-stag stag-r">⚠ Risk Flagged</span></td><td><span class="at-stag stag-r">At Risk</span></td></tr>
+            <tr><td><strong>Flash 22 Pack</strong></td><td style="font-family:'DM Mono',monospace;font-size:10px;">REI-F22-26</td><td>Packs</td><td>Blue / Olive / Black</td><td>Cascade Textiles</td><td><span class="at-stag stag-y">In Review</span></td><td><span class="at-stag stag-y">Pending</span></td></tr>
+            <tr><td><strong>Sahara Shade Pants</strong></td><td style="font-family:'DM Mono',monospace;font-size:10px;">REI-SSP-26</td><td>Apparel</td><td>Sand / Dune / Clay</td><td>Summit Fabrics</td><td><span class="at-stag stag-g">✓ Approved</span></td><td><span class="at-stag stag-g">Ready</span></td></tr>
+            <tr><td><strong>Hydration Vest 12L</strong></td><td style="font-family:'DM Mono',monospace;font-size:10px;">REI-HV12-26</td><td>Running</td><td>Alpine / Coral</td><td>Olympic Gear Works</td><td><span class="at-stag stag-g">✓ Approved</span></td><td><span class="at-stag stag-g">Ready</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Vendor Board -->
+      <div class="os-content" id="os-vendor">
+        <div class="kanban">
+          <div><div class="k-col-hdr">Outreach Sent <span class="k-count">1</span></div>
+            <div class="k-card"><div class="k-name">Rainier Manufacturing</div><div class="k-detail">3 SKUs · 3 days overdue</div><div class="k-agent" style="color:#F59E0B;background:#FEF3C7;">⚠ Quality Gate Agent</div></div>
+          </div>
+          <div><div class="k-col-hdr">Confirmed <span class="k-count">2</span></div>
+            <div class="k-card"><div class="k-name">Cascade Textiles</div><div class="k-detail">4 SKUs · Mar 18</div><div class="k-agent">✓ Vendor Liaison Agent logged</div></div>
+            <div class="k-card"><div class="k-name">Olympic Gear Works</div><div class="k-detail">2 SKUs · Mar 20</div><div class="k-agent">✓ Vendor Liaison Agent logged</div></div>
+          </div>
+          <div><div class="k-col-hdr">QC Complete <span class="k-count">1</span></div>
+            <div class="k-card"><div class="k-name">Summit Fabrics</div><div class="k-detail">5 SKUs · Mar 21</div><div class="k-agent">✓ Quality Gate Agent logged</div></div>
+          </div>
+          <div><div class="k-col-hdr">Launch Ready <span class="k-count">1</span></div>
+            <div class="k-card" style="border-color:#6EE7B7;"><div class="k-name">PNW Supply Co.</div><div class="k-detail">6 SKUs · All clear</div><div class="k-agent">✓ Launch Coordinator logged</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar -->
+      <div class="os-content" id="os-calendar">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot done"></div><div class="tl-date">March 15, 2026 — Complete</div><div class="tl-title">Spring SKU Lock</div><div class="tl-agent">✓ Inventory Intelligence Agent — 52 SKUs logged</div></div>
+            <div class="tl-item"><div class="tl-dot warn"></div><div class="tl-date">April 1 — Risk flagged</div><div class="tl-title">Vendor QC Complete</div><div class="tl-agent">⚠ Quality Gate Agent — 1 vendor at risk</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">April 15</div><div class="tl-title">Store Inventory Allocated</div><div class="tl-agent">Inventory Intelligence Agent — 180 stores</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">May 9</div><div class="tl-title">Campaign Assets Live</div><div class="tl-agent">Campaign Bridge Agent</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:var(--teal);box-shadow:0 0 0 2px var(--teal);width:18px;height:18px;left:-24px;top:2px;"></div><div class="tl-date" style="color:var(--teal);font-weight:600;">May 16 — LAUNCH</div><div class="tl-title" style="font-size:15px;">REI Anniversary Sale</div><div class="tl-agent" style="color:var(--teal);">All agents standing by</div></div>
+          </div>
+          <div style="background:#F8F9FC;border-radius:8px;padding:20px;">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;margin-bottom:12px;">Launch Readiness — Logged by Agents</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div><div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:#6B7280;margin-bottom:3px;"><span>Vendor confirmations</span><span style="color:#0F172A;font-weight:600;">47 / 52</span></div><div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;"><div style="height:100%;width:90%;background:linear-gradient(90deg,#1F6FEB,#00A98F);border-radius:3px;"></div></div></div>
+              <div><div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:#6B7280;margin-bottom:3px;"><span>QC approvals logged</span><span style="color:#0F172A;font-weight:600;">38 / 52</span></div><div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;"><div style="height:100%;width:73%;background:#00A98F;border-radius:3px;"></div></div></div>
+              <div><div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:#6B7280;margin-bottom:3px;"><span>Campaign assets confirmed</span><span style="color:#0F172A;font-weight:600;">12 / 18</span></div><div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;"><div style="height:100%;width:67%;background:#F5A623;border-radius:3px;"></div></div></div>
+              <div><div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:#6B7280;margin-bottom:3px;"><span>Store allocations</span><span style="color:#0F172A;font-weight:600;">0 / 180</span></div><div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;"><div style="height:100%;width:0%;background:#7B61FF;border-radius:3px;"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent Log -->
+      <div class="os-content" id="os-log">
+        <div class="log-list">
+          <div class="log-entry warn"><div class="log-agent">Quality Gate Agent</div><div class="log-action">Trailbreak Hoodie lead time risk logged to SKU tracker. Rainier Mfg response overdue 3 days — automated follow-up sent. Alex Chen notified. Escalation flag set if no response by EOD. Source of truth updated.</div><div class="log-time">2h ago</div></div>
+          <div class="log-entry ok"><div class="log-agent">Vendor Liaison Agent</div><div class="log-action">Cascade Textiles QC completion logged to Flash 22 Pack record. Status updated from "In Review" to "Confirmed." Launch Coordinator Agent notified. Source of truth updated.</div><div class="log-time">4h ago</div></div>
+          <div class="log-entry ok"><div class="log-agent">Inventory Intelligence Agent</div><div class="log-action">Hydration Vest 12L allocation logged across all 180 store locations. Regional splits applied from historical sell-through. Record updated. No anomalies detected.</div><div class="log-time">6h ago</div></div>
+          <div class="log-entry info"><div class="log-agent">Campaign Bridge Agent</div><div class="log-action">Spring launch brief logged and routed to Creative — 18 hero assets, 52 PDP images, 180-store spec included. All colorway confirmations attached. Creative acknowledged receipt. Record updated.</div><div class="log-time">1d ago</div></div>
+          <div class="log-entry ok"><div class="log-agent">Compliance Warden Agent</div><div class="log-action">REI Co-op sustainability standards verified across all Q2 private label SKUs. 47 of 52 vendors confirmed — 5 pending logged for April 1 milestone review. Co-op accountability record updated.</div><div class="log-time">2d ago</div></div>
+          <div class="log-entry info"><div class="log-agent">Launch Coordinator Agent</div><div class="log-action">Weekly readiness report compiled and logged: 87% complete. Critical path flagged: Rainier Mfg QC. Next milestone: April 1 deadline. All stakeholders notified. Source of truth reflects current state.</div><div class="log-time">3d ago</div></div>
+        </div>
+      </div>
+
+      <!-- READINESS TRACKER -->
+      <div class="os-content" id="os-readiness">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <!-- Overall readiness -->
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;margin-bottom:16px;">Overall Launch Readiness — May 16, 2026</div>
+            <!-- Big readiness number -->
+            <div style="text-align:center;background:linear-gradient(135deg,rgba(31,111,235,0.05),rgba(0,169,143,0.04));border:1px solid rgba(31,111,235,0.12);border-radius:12px;padding:24px;margin-bottom:16px;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1F6FEB,#00A98F);"></div>
+              <div style="font-family:'Playfair Display',serif;font-size:64px;font-weight:900;color:#1F6FEB;line-height:1;">87<span style="font-size:28px;color:#6B7280;font-family:'DM Sans',sans-serif;font-weight:400;">%</span></div>
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#6B7280;margin-bottom:4px;">Launch Readiness</div>
+              <div style="font-family:'DM Mono',monospace;font-size:10px;color:#374151;">47/52 vendors logged · 1 risk flagged · T-54 days</div>
+            </div>
+            <!-- Per-agent readiness bars -->
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;margin-bottom:4px;">Readiness by Agent</div>
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                  <div style="display:flex;align-items:center;gap:8px;"><span style="font-family:'DM Mono',monospace;font-size:10px;color:#00A98F;">✓</span><span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#0F172A;">Launch Coordinator Agent</span></div>
+                  <span style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:#0F172A;">87%</span>
+                </div>
+                <div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;"><div style="height:100%;width:87%;background:linear-gradient(90deg,#1F6FEB,#00A98F);border-radius:3px;"></div></div>
+                <div style="font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;margin-top:2px;">Overall coordinator — 47/52 vendors logged</div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                  <div style="display:flex;align-items:center;gap:8px;"><span style="font-family:'DM Mono',monospace;font-size:10px;color:#F59E0B;">⚠</span><span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#0F172A;">Quality Gate Agent</span></div>
+                  <span style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:#0F172A;">73%</span>
+                </div>
+                <div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;"><div style="height:100%;width:73%;background:#F59E0B;border-radius:3px;"></div></div>
+                <div style="font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;margin-top:2px;">38/52 QC approvals logged · 1 risk active</div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                  <div style="display:flex;align-items:center;gap:8px;"><span style="font-family:'DM Mono',monospace;font-size:10px;color:#00A98F;">✓</span><span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#0F172A;">Inventory Intelligence Agent</span></div>
+                  <span style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:#0F172A;">0%</span>
+                </div>
+                <div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;"><div style="height:100%;width:0%;background:#7B61FF;border-radius:3px;"></div></div>
+                <div style="font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;margin-top:2px;">Store allocation pending · milestone: Apr 15</div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                  <div style="display:flex;align-items:center;gap:8px;"><span style="font-family:'DM Mono',monospace;font-size:10px;color:#1F6FEB;">↗</span><span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#0F172A;">Campaign Bridge Agent</span></div>
+                  <span style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:#0F172A;">67%</span>
+                </div>
+                <div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;"><div style="height:100%;width:67%;background:#1F6FEB;border-radius:3px;"></div></div>
+                <div style="font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;margin-top:2px;">12/18 assets confirmed · brief routed</div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                  <div style="display:flex;align-items:center;gap:8px;"><span style="font-family:'DM Mono',monospace;font-size:10px;color:#00A98F;">✓</span><span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#0F172A;">Compliance Warden Agent</span></div>
+                  <span style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:#0F172A;">90%</span>
+                </div>
+                <div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;"><div style="height:100%;width:90%;background:#00A98F;border-radius:3px;"></div></div>
+                <div style="font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;margin-top:2px;">47/52 sustainability checks logged</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Risk flags + next milestones -->
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;margin-bottom:10px;">Active Risk Flags — logged by agents</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="background:#FEF3C7;border:1px solid #FDE68A;border-left:3px solid #F59E0B;border-radius:6px;padding:12px 14px;">
+                  <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:#92400E;margin-bottom:4px;">⚠ HIGH — Quality Gate Agent</div>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#92400E;line-height:1.5;">Trailbreak Hoodie (REI-TBH-26): Rainier Mfg QC response overdue 3 days. Auto follow-up sent. Escalation pending EOD.</div>
+                  <div style="font-family:'DM Mono',monospace;font-size:9px;color:#B45309;margin-top:6px;">Logged: 2h ago · Status: Monitoring</div>
+                </div>
+                <div style="background:#EFF6FF;border:1px solid rgba(31,111,235,0.2);border-left:3px solid #1F6FEB;border-radius:6px;padding:12px 14px;">
+                  <div style="font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:#1e3a5f;margin-bottom:4px;">ℹ INFO — Inventory Intelligence Agent</div>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#374151;line-height:1.5;">Store allocation milestone not yet started. T-23 days to April 15 deadline. No action required yet.</div>
+                  <div style="font-family:'DM Mono',monospace;font-size:9px;color:#6B7280;margin-top:6px;">Logged: 1d ago · Status: On schedule</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;margin-bottom:10px;">Next critical milestones</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:white;border:1px solid var(--border);border-radius:8px;">
+                  <div style="font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:#F59E0B;min-width:56px;">Apr 1</div>
+                  <div><div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#0F172A;">Vendor QC Complete</div><div style="font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;">Quality Gate Agent monitoring</div></div>
+                  <div style="margin-left:auto;"><span style="font-family:'DM Mono',monospace;font-size:9px;background:#FEF3C7;color:#92400E;border-radius:100px;padding:2px 8px;">At Risk</span></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:white;border:1px solid var(--border);border-radius:8px;">
+                  <div style="font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:#6B7280;min-width:56px;">Apr 15</div>
+                  <div><div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#0F172A;">Store Allocation</div><div style="font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;">Inventory Intelligence Agent</div></div>
+                  <div style="margin-left:auto;"><span style="font-family:'DM Mono',monospace;font-size:9px;background:#F0FDF9;color:#065F46;border-radius:100px;padding:2px 8px;">On Track</span></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:white;border:1px solid var(--border);border-radius:8px;">
+                  <div style="font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:#6B7280;min-width:56px;">May 9</div>
+                  <div><div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#0F172A;">Campaign Assets Live</div><div style="font-family:'DM Mono',monospace;font-size:9px;color:#9CA3AF;">Campaign Bridge Agent</div></div>
+                  <div style="margin-left:auto;"><span style="font-family:'DM Mono',monospace;font-size:9px;background:#EFF6FF;color:#1e3a5f;border-radius:100px;padding:2px 8px;">In Progress</span></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:linear-gradient(135deg,rgba(31,111,235,0.06),rgba(0,169,143,0.04));border:1px solid rgba(31,111,235,0.15);border-radius:8px;">
+                  <div style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:#1F6FEB;min-width:56px;">May 16</div>
+                  <div><div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;color:#0F172A;">🎯 Anniversary Sale</div><div style="font-family:'DM Mono',monospace;font-size:9px;color:#1F6FEB;">All agents standing by</div></div>
+                  <div style="margin-left:auto;"><span style="font-family:'DM Mono',monospace;font-size:9px;background:#D1FAE5;color:#065F46;border-radius:100px;padding:2px 8px;font-weight:700;">LAUNCH</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <div class="cta-box">
+      <div class="cta-title">See your custom Anniversary Sale<br>agents in a <em>20-minute demo.</em></div>
+      <div class="cta-sub">Built by your team. Powered by Omni and Field Agents. No engineering required.</div>
+      <button class="cta-btn">Book 20 minutes with Jamie</button>
+      <div class="cta-sig">— Jamie Torres, Account Executive, Airtable</div>
+      <div class="cta-contact">
+        📞 (206) 555-0142 · 💬 Text me anytime<br>
+        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2a404b47434f045e4558584f596a4b43585e4b48464f04494547">[email&#160;protected]</a>
+      </div>
+      <div class="cta-airtable">
+        <svg width="18" height="18" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="rgba(196,149,106,0.2)"/><text x="5" y="22" font-size="16" fill="#C4956A">⬡</text></svg>
+        Airtable
+      </div>
+    </div>
+  </div>
+
+</div><!-- end launch-os -->
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── COUNTDOWN ──
+function updateCountdown() {
+  const launch = new Date('2026-05-16T09:00:00-07:00');
+  const now = new Date();
+  const diff = launch - now;
+  if (diff <= 0) return;
+  const d = Math.floor(diff/(1000*60*60*24));
+  const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((diff%(1000*60*60))/(1000*60));
+  const s = Math.floor((diff%(1000*60))/1000);
+  const p = n => String(n).padStart(2,'0');
+  document.getElementById('cd-days').textContent = p(d);
+  document.getElementById('cd-hours').textContent = p(h);
+  document.getElementById('cd-mins').textContent = p(m);
+  document.getElementById('cd-secs').textContent = p(s);
+  document.getElementById('cd-days-text').textContent = d;
+  document.getElementById('sticky-clock').textContent = `${p(d)}d ${p(h)}h ${p(m)}m ${p(s)}s`;
+  document.getElementById('os-date-badge').textContent = `May 16, 2026 · T-${d} days`;
+  // Cover and page references
+  if(document.getElementById('cover-cd-days')) document.getElementById('cover-cd-days').textContent = d;
+  if(document.getElementById('pg3-days')) document.getElementById('pg3-days').textContent = d;
+  if(document.getElementById('pg6-days')) document.getElementById('pg6-days').textContent = d;
+  if(document.getElementById('pg6-days-2')) document.getElementById('pg6-days-2').textContent = d;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// ── OS TABS ──
+function osTab(tab, event) {
+  document.querySelectorAll('.os-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.os-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('os-'+tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── PREVIEW TABS ──
+function prevTab(tab, btn) {
+  document.querySelectorAll('.at-prev-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.at-prev-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('prev-'+tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── OPEN OS ──
+function openOS() {
+  document.getElementById('launch-os-entry').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>{
+    const fill = document.getElementById('meter-fill');
+    if(fill) fill.style.width='87%';
+  },800);
+}
+
+// ── CHAOS LOOP ──
+function loopChaos() {
+  document.querySelectorAll('.slack-msg').forEach((m,i)=>{
+    m.style.animation='none';
+    m.offsetHeight;
+    m.style.animation=`slack-in 0.4s ease ${i*1.2}s both`;
+  });
+}
+setInterval(loopChaos, 7000);
+
+// ── METER ON SCROLL ──
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const f=document.getElementById('meter-fill');
+      if(f) f.style.width='87%';
+    }
+  });
+},{threshold:0.3});
+const mf=document.querySelector('.meter-fill');
+if(mf) io.observe(mf);
+</script>
+<script>
+// Try to load the specific Unsplash photo ikXLfPrt5G0 (couple hiking in mountains)
+(function(){
+  var img = document.getElementById('pants-img');
+  if(!img) return;
+  var attempts = [
+    'https://images.unsplash.com/photo-1551632811-561732d1e306?w=300&q=70',
